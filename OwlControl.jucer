@@ -32,9 +32,6 @@
       <GROUP id="{59FF1104-D181-FD84-8D7F-1959627618B9}" name="win-util">
         <FILE id="BLpYzc" name="stdint.h" compile="0" resource="0" file="Libraries/win-util/stdint.h"/>
       </GROUP>
-      <FILE id="ipdniA" name="getopt.h" compile="0" resource="0" file="Libraries/getopt.h"/>
-      <FILE id="DTfdpv" name="sysex.c" compile="1" resource="0" file="Libraries/sysex.c"/>
-      <FILE id="f4xkxv" name="sysex.h" compile="0" resource="0" file="Libraries/sysex.h"/>
     </GROUP>
     <FILE id="dMq0Lz" name="icon.png" compile="0" resource="1" file="Source/icons/icon.png"/>
   </MAINGROUP>
@@ -53,16 +50,15 @@
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
   </MODULES>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="../../Libraries/libusbx/libusb-1.0.a"
-               extraCompilerFlags="-I../../Libraries -I../../Libraries/libusbx"
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="" extraCompilerFlags=""
                externalLibraries="" extraDefs="HAVE_NANOSLEEP=1" smallIcon="dMq0Lz"
                bigIcon="dMq0Lz">
       <CONFIGURATIONS>
         <CONFIGURATION name="Release" osxSDK="10.6 SDK" osxCompatibility="10.6 SDK"
                        osxArchitecture="default" isDebug="0" optimisation="2" targetName="OwlControl"
-                       libraryPath="" headerPath="../../Libraries/libusbx&#10;../../Libraries"/>
+                       libraryPath="" headerPath="../../Libraries"/>
         <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
-                       isDebug="1" optimisation="1" targetName="OwlControl" headerPath="../../Libraries/libusbx&#10;../../Libraries"
+                       isDebug="1" optimisation="1" targetName="OwlControl" headerPath="../../Libraries"
                        libraryPath=""/>
       </CONFIGURATIONS>
       <MODULEPATHS>
@@ -80,9 +76,8 @@
         <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
-    <LINUX_MAKE targetFolder="Builds/Linux" extraDefs="HAVE_NANOSLEEP=1" extraCompilerFlags="-I../../Libraries -I../../Libraries/libusbx -I../../Source -I../../Libraries/dfu-util/"
-                extraLinkerFlags="../../Libraries/libusbx/libusb-1.0.so" externalLibraries=""
-                smallIcon="dMq0Lz" bigIcon="dMq0Lz">
+    <LINUX_MAKE targetFolder="Builds/Linux" extraDefs="HAVE_NANOSLEEP=1" extraCompilerFlags="-I../../Libraries"
+                extraLinkerFlags="" externalLibraries="" smallIcon="dMq0Lz" bigIcon="dMq0Lz">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
                        targetName="OwlControl"/>
@@ -105,14 +100,13 @@
       </MODULEPATHS>
     </LINUX_MAKE>
     <VS2008 targetFolder="Builds/VisualStudio2008" extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS"
-            externalLibraries="$(SolutionDir)..\..\Libraries\libusbx\libusb-1.0.lib"
-            smallIcon="dMq0Lz" bigIcon="dMq0Lz">
+            externalLibraries="" smallIcon="dMq0Lz" bigIcon="dMq0Lz">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" isDebug="1"
-                       optimisation="1" targetName="OwlControl" libraryPath="" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
+                       optimisation="1" targetName="OwlControl" libraryPath="" headerPath="..\..\Libraries"
                        prebuildCommand=""/>
         <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" isDebug="0"
-                       optimisation="2" targetName="OwlControl" libraryPath="" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
+                       optimisation="2" targetName="OwlControl" libraryPath="" headerPath="..\..\Libraries"
                        prebuildCommand=""/>
       </CONFIGURATIONS>
       <MODULEPATHS>
@@ -131,14 +125,14 @@
       </MODULEPATHS>
     </VS2008>
     <VS2010 targetFolder="Builds/VisualStudio2010" smallIcon="dMq0Lz" bigIcon="dMq0Lz"
-            extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS" externalLibraries="$(SolutionDir)..\..\Libraries\libusbx\libusb-1.0.lib"
+            extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS" externalLibraries=""
             extraCompilerFlags="">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="1" optimisation="1" targetName="OwlControl" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
+                       isDebug="1" optimisation="1" targetName="OwlControl" headerPath="..\..\Libraries"
                        prebuildCommand=""/>
         <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="0" optimisation="2" targetName="OwlControl" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
+                       isDebug="0" optimisation="2" targetName="OwlControl" headerPath="..\..\Libraries"
                        prebuildCommand=""/>
       </CONFIGURATIONS>
       <MODULEPATHS>
@@ -157,14 +151,14 @@
       </MODULEPATHS>
     </VS2010>
     <VS2012 targetFolder="Builds/VisualStudio2012" extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS"
-            externalLibraries="$(SolutionDir)..\..\Libraries\libusbx\libusb-1.0.lib"
-            smallIcon="dMq0Lz" bigIcon="dMq0Lz" toolset="v110_xp" extraCompilerFlags="">
+            externalLibraries="" smallIcon="dMq0Lz" bigIcon="dMq0Lz" toolset="v110_xp"
+            extraCompilerFlags="">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="1" optimisation="1" targetName="OwlControl" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
+                       isDebug="1" optimisation="1" targetName="OwlControl" headerPath="..\..\Libraries"
                        prebuildCommand=""/>
         <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="0" optimisation="2" targetName="OwlControl" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
+                       isDebug="0" optimisation="2" targetName="OwlControl" headerPath="..\..\Libraries"
                        prebuildCommand=""/>
       </CONFIGURATIONS>
       <MODULEPATHS>
