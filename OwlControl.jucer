@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="cjPLB4" name="OwlControl" projectType="guiapp" version="1.0.0"
+              bundleIdentifier="com.pingdynasty.OwlControl" includeBinaryInAppConfig="1"
+              jucerVersion="3.1.0" companyName="Rebel Technology">
+  <MAINGROUP id="nyhdga" name="OwlControl">
+    <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Application">
+      <GROUP id="{DB625BC2-D638-342B-46F0-2C11332BEE69}" name="GUI">
+        <FILE id="lvttDF" name="ApplicationSettingsWindow.cpp" compile="1"
+              resource="0" file="Source/ApplicationSettingsWindow.cpp"/>
+        <FILE id="bvN4BV" name="ApplicationSettingsWindow.h" compile="0" resource="0"
+              file="Source/ApplicationSettingsWindow.h"/>
+        <FILE id="p7DYsR" name="OwlControlGui.cpp" compile="1" resource="0"
+              file="Source/OwlControlGui.cpp"/>
+        <FILE id="PjPrzx" name="OwlControlGui.h" compile="0" resource="0" file="Source/OwlControlGui.h"/>
+      </GROUP>
+      <FILE id="fMKCC9" name="ApplicationCommands.h" compile="0" resource="0"
+            file="Source/ApplicationCommands.h"/>
+      <FILE id="jKrXcu" name="ApplicationConfiguration.cpp" compile="1" resource="0"
+            file="Source/ApplicationConfiguration.cpp"/>
+      <FILE id="yZV1o6" name="ApplicationConfiguration.h" compile="0" resource="0"
+            file="Source/ApplicationConfiguration.h"/>
+      <FILE id="mpRW8n" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="fOoNsr" name="OpenWareMidiControl.h" compile="0" resource="0"
+            file="Source/OpenWareMidiControl.h"/>
+      <FILE id="mV7fGq" name="OwlControlSettings.cpp" compile="1" resource="0"
+            file="Source/OwlControlSettings.cpp"/>
+      <FILE id="IDIyJd" name="OwlControlSettings.h" compile="0" resource="0"
+            file="Source/OwlControlSettings.h"/>
+    </GROUP>
+    <GROUP id="{176D1067-6048-7BE4-8505-AD18BB0F2370}" name="Libraries">
+      <GROUP id="{59FF1104-D181-FD84-8D7F-1959627618B9}" name="win-util">
+        <FILE id="BLpYzc" name="stdint.h" compile="0" resource="0" file="Libraries/win-util/stdint.h"/>
+      </GROUP>
+      <FILE id="ipdniA" name="getopt.h" compile="0" resource="0" file="Libraries/getopt.h"/>
+      <FILE id="DTfdpv" name="sysex.c" compile="1" resource="0" file="Libraries/sysex.c"/>
+      <FILE id="f4xkxv" name="sysex.h" compile="0" resource="0" file="Libraries/sysex.h"/>
+    </GROUP>
+    <FILE id="dMq0Lz" name="icon.png" compile="0" resource="1" file="Source/icons/icon.png"/>
+  </MAINGROUP>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_audio" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
+  </MODULES>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraLinkerFlags="../../Libraries/libusbx/libusb-1.0.a"
+               extraCompilerFlags="-I../../Libraries -I../../Libraries/libusbx"
+               externalLibraries="" extraDefs="HAVE_NANOSLEEP=1" smallIcon="dMq0Lz"
+               bigIcon="dMq0Lz">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Release" osxSDK="10.6 SDK" osxCompatibility="10.6 SDK"
+                       osxArchitecture="default" isDebug="0" optimisation="2" targetName="OwlControl"
+                       libraryPath="" headerPath="../../Libraries/libusbx&#10;../../Libraries"/>
+        <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+                       isDebug="1" optimisation="1" targetName="OwlControl" headerPath="../../Libraries/libusbx&#10;../../Libraries"
+                       libraryPath=""/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+    <LINUX_MAKE targetFolder="Builds/Linux" extraDefs="HAVE_NANOSLEEP=1" extraCompilerFlags="-I../../Libraries -I../../Libraries/libusbx -I../../Source -I../../Libraries/dfu-util/"
+                extraLinkerFlags="../../Libraries/libusbx/libusb-1.0.so" externalLibraries=""
+                smallIcon="dMq0Lz" bigIcon="dMq0Lz">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
+                       targetName="OwlControl"/>
+        <CONFIGURATION name="Release" libraryPath="/usr/X11R6/lib/" isDebug="0" optimisation="2"
+                       targetName="OwlControl"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
+      </MODULEPATHS>
+    </LINUX_MAKE>
+    <VS2008 targetFolder="Builds/VisualStudio2008" extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS"
+            externalLibraries="$(SolutionDir)..\..\Libraries\libusbx\libusb-1.0.lib"
+            smallIcon="dMq0Lz" bigIcon="dMq0Lz">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" isDebug="1"
+                       optimisation="1" targetName="OwlControl" libraryPath="" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
+                       prebuildCommand=""/>
+        <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" isDebug="0"
+                       optimisation="2" targetName="OwlControl" libraryPath="" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
+                       prebuildCommand=""/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
+      </MODULEPATHS>
+    </VS2008>
+    <VS2010 targetFolder="Builds/VisualStudio2010" smallIcon="dMq0Lz" bigIcon="dMq0Lz"
+            extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS" externalLibraries="$(SolutionDir)..\..\Libraries\libusbx\libusb-1.0.lib"
+            extraCompilerFlags="">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="1" optimisation="1" targetName="OwlControl" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
+                       prebuildCommand=""/>
+        <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="2" targetName="OwlControl" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
+                       prebuildCommand=""/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
+      </MODULEPATHS>
+    </VS2010>
+    <VS2012 targetFolder="Builds/VisualStudio2012" extraDefs="HAVE_WINDOWS_H&#10;_CRT_SECURE_NO_WARNINGS"
+            externalLibraries="$(SolutionDir)..\..\Libraries\libusbx\libusb-1.0.lib"
+            smallIcon="dMq0Lz" bigIcon="dMq0Lz" toolset="v110_xp" extraCompilerFlags="">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="1" optimisation="1" targetName="OwlControl" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
+                       prebuildCommand=""/>
+        <CONFIGURATION name="Release" winWarningLevel="3" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="2" targetName="OwlControl" headerPath="..\..\Libraries\libusbx&#10;..\..\Libraries"
+                       prebuildCommand=""/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
+      </MODULEPATHS>
+    </VS2012>
+  </EXPORTFORMATS>
+  <JUCEOPTIONS/>
+</JUCERPROJECT>

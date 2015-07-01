@@ -1,0 +1,45 @@
+.DS_Store
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# Compiled Visual Studio Folders
+Builds/VisualStudio2012/Release/
+Builds/VisualStudio2012/Debug/
+
+Builds/VisualStudio2010/Release/
+Builds/VisualStudio2010/Debug/
+Builds/VisualStudio2010/ipch/
+
+Builds/VisualStudio2008/Release/
+Builds/VisualStudio2008/Debug/
+Builds/VisualStudio2008/ipch/
+
+# Visual Studio Solution and User Settings
+Builds/VisualStudio2012/OwlControl.sdf
+Builds/VisualStudio2012/OwlControl.opensdf
+Builds/VisualStudio2012/OwlControl.v11.suo
+Builds/VisualStudio2012/OwlControl.vcxproj.user
+
+Builds/VisualStudio2010/OwlControl.sdf
+Builds/VisualStudio2010/OwlControl.opensdf
+Builds/VisualStudio2010/OwlControl.suo
+Builds/VisualStudio2010/OwlControl.sln.docstates.suo
+Builds/VisualStudio2010/OwlControl.vcxproj.user
+
+Builds/VisualStudio2008/OwlControl.sdf
+Builds/VisualStudio2008/OwlControl.opensdf
+Builds/VisualStudio2008/OwlControl.suo
+Builds/VisualStudio2008/OwlControl.sln.docstates.suo
+Builds/VisualStudio2008/OwlControl.vcxproj.user
