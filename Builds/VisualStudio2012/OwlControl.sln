@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2012
+Project("{18BB1B45-3EF8-5994-48E7-8BA973A3DC51}") = "OwlControl", "OwlControl.vcxproj", "{D6ECF24D-BD15-6456-2AC3-322A0542AFD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6ECF24D-BD15-6456-2AC3-322A0542AFD9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D6ECF24D-BD15-6456-2AC3-322A0542AFD9}.Debug|Win32.Build.0 = Debug|Win32
+		{D6ECF24D-BD15-6456-2AC3-322A0542AFD9}.Release|Win32.ActiveCfg = Release|Win32
+		{D6ECF24D-BD15-6456-2AC3-322A0542AFD9}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
