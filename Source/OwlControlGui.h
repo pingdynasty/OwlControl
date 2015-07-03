@@ -17,8 +17,8 @@
   ==============================================================================
 */
 
-#ifndef __JUCE_HEADER_894D3EBAC9C694FA__
-#define __JUCE_HEADER_894D3EBAC9C694FA__
+#ifndef __JUCE_HEADER_9F1373FD34D2C648__
+#define __JUCE_HEADER_9F1373FD34D2C648__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "JuceHeader.h"
@@ -37,11 +37,11 @@
                                                                     //[/Comments]
 */
 class OwlControlGui  : public Component,
-                    public Value::Listener,
-                    public Timer,
-                    public ComboBoxListener,
-                    public ButtonListener,
-                    public SliderListener
+                       public Value::Listener,
+                       public Timer,
+                       public ComboBoxListener,
+                       public ButtonListener,
+                       public SliderListener
 {
 public:
     //==============================================================================
@@ -123,8 +123,6 @@ private:
     ScopedPointer<Slider> slider2;
     ScopedPointer<Slider> slider5;
     ScopedPointer<Label> label5;
-    ScopedPointer<ComboBox> modeComboBox;
-    ScopedPointer<Label> modeLabel;
     ScopedPointer<ToggleButton> remoteControlButton;
     ScopedPointer<ComboBox> blockSizeComboBox;
     ScopedPointer<Label> blockSizeeLabel;
@@ -141,4 +139,4 @@ private:
 //[EndFile] You can add extra defines here...
 //[/EndFile]
 
-#endif   // __JUCE_HEADER_894D3EBAC9C694FA__
+#endif   // __JUCE_HEADER_9F1373FD34D2C648__

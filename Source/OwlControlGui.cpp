@@ -81,7 +81,7 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
     deviceInfoButton->addListener (this);
 
     addAndMakeVisible (bypassButton = new ToggleButton ("new toggle button"));
-    bypassButton->setButtonText (TRANS("Codec Bypass"));
+    bypassButton->setButtonText (TRANS("Bypass"));
     bypassButton->addListener (this);
 
     addAndMakeVisible (swapLRButton = new ToggleButton ("new toggle button"));
@@ -320,25 +320,6 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
     label5->setColour (TextEditor::textColourId, Colours::black);
     label5->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    addAndMakeVisible (modeComboBox = new ComboBox ("new combo box"));
-    modeComboBox->setEditableText (false);
-    modeComboBox->setJustificationType (Justification::centredLeft);
-    modeComboBox->setTextWhenNothingSelected (String::empty);
-    modeComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-    modeComboBox->addItem (TRANS("Single"), 1);
-    modeComboBox->addItem (TRANS("Dual"), 2);
-    modeComboBox->addItem (TRANS("Series"), 3);
-    modeComboBox->addItem (TRANS("Parallel"), 4);
-    modeComboBox->addListener (this);
-
-    addAndMakeVisible (modeLabel = new Label ("new label",
-                                              TRANS("Patch Mode")));
-    modeLabel->setFont (Font (15.00f, Font::plain));
-    modeLabel->setJustificationType (Justification::centredRight);
-    modeLabel->setEditable (false, false, false);
-    modeLabel->setColour (TextEditor::textColourId, Colours::black);
-    modeLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
-
     addAndMakeVisible (remoteControlButton = new ToggleButton ("new toggle button"));
     remoteControlButton->setButtonText (TRANS("Remote Control"));
     remoteControlButton->addListener (this);
@@ -494,8 +475,6 @@ OwlControlGui::~OwlControlGui()
     slider2 = nullptr;
     slider5 = nullptr;
     label5 = nullptr;
-    modeComboBox = nullptr;
-    modeLabel = nullptr;
     remoteControlButton = nullptr;
     blockSizeComboBox = nullptr;
     blockSizeeLabel = nullptr;
@@ -536,8 +515,8 @@ void OwlControlGui::resized()
     leftGainLabel->setBounds (17, 492, 112, 24);
     saveButton->setBounds (216, 392, 150, 24);
     deviceInfoButton->setBounds (384, 392, 150, 24);
-    bypassButton->setBounds (424, 448, 112, 24);
-    swapLRButton->setBounds (544, 448, 112, 24);
+    bypassButton->setBounds (528, 584, 72, 24);
+    swapLRButton->setBounds (408, 584, 112, 24);
     rightGainLabel->setBounds (17, 521, 112, 24);
     rightGainSlider->setBounds (132, 521, 150, 24);
     leftOutGainSlider->setBounds (132, 556, 150, 24);
@@ -548,15 +527,15 @@ void OwlControlGui::resized()
     rightInputMuteButton->setBounds (292, 521, 100, 24);
     leftOutputMuteButton->setBounds (292, 556, 100, 24);
     rightOutputMuteButton->setBounds (292, 585, 100, 24);
-    samplingBitsComboBox->setBounds (527, 552, 150, 24);
-    samplingBitsLabel->setBounds (422, 552, 103, 24);
+    samplingBitsComboBox->setBounds (263, 616, 150, 24);
+    samplingBitsLabel->setBounds (158, 616, 103, 24);
     ledButton->setBounds (344, 312, 64, 64);
-    protocolComboBox->setBounds (527, 584, 150, 24);
-    protocolLabel->setBounds (422, 584, 103, 24);
-    masterButton->setBounds (664, 448, 71, 24);
-    statusLabel->setBounds (384, 424, 336, 16);
-    patchSlotAComboBox->setBounds (120, 320, 150, 24);
-    patchSlotALabel->setBounds (48, 320, 72, 24);
+    protocolComboBox->setBounds (527, 616, 150, 24);
+    protocolLabel->setBounds (422, 616, 103, 24);
+    masterButton->setBounds (80, 616, 71, 24);
+    statusLabel->setBounds (384, 456, 336, 16);
+    patchSlotAComboBox->setBounds (120, 352, 150, 24);
+    patchSlotALabel->setBounds (48, 352, 72, 24);
     resetButton->setBounds (544, 392, 150, 24);
     sensitivityComboBox->setBounds (552, 352, 150, 24);
     sensitivityLabel->setBounds (448, 352, 101, 24);
@@ -571,14 +550,12 @@ void OwlControlGui::resized()
     slider2->setBounds (264, 29, 90, 90);
     slider5->setBounds (621, 144, 72, 139);
     label5->setBounds (608, 282, 96, 24);
-    modeComboBox->setBounds (551, 320, 150, 24);
-    modeLabel->setBounds (448, 320, 101, 24);
-    remoteControlButton->setBounds (184, 448, 112, 24);
+    remoteControlButton->setBounds (408, 552, 112, 24);
     blockSizeComboBox->setBounds (526, 488, 150, 24);
     blockSizeeLabel->setBounds (421, 488, 103, 24);
-    halfSpeedButton->setBounds (304, 448, 112, 24);
+    halfSpeedButton->setBounds (608, 584, 96, 24);
     messageLabel->setBounds (16, 424, 328, 16);
-    statsLabel->setBounds (16, 448, 160, 24);
+    statsLabel->setBounds (16, 456, 328, 16);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -678,12 +655,6 @@ void OwlControlGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
         }
       theSettings.setCc(cc, val);
         //[/UserComboBoxCode_sensitivityComboBox]
-    }
-    else if (comboBoxThatHasChanged == modeComboBox)
-    {
-        //[UserComboBoxCode_modeComboBox] -- add your combo box handling code here..
-      // theSettings.setCc(PATCH_MODE, (comboBoxThatHasChanged->getSelectedId()-1) << 5);
-        //[/UserComboBoxCode_modeComboBox]
     }
     else if (comboBoxThatHasChanged == blockSizeComboBox)
     {
@@ -1128,10 +1099,10 @@ BEGIN_JUCER_METADATA
               virtualName="" explicitFocusOrder="0" pos="384 392 150 24" buttonText="Device Info"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="new toggle button" id="2c9068f31b4a945b" memberName="bypassButton"
-                virtualName="" explicitFocusOrder="0" pos="424 448 112 24" buttonText="Codec Bypass"
+                virtualName="" explicitFocusOrder="0" pos="528 584 72 24" buttonText="Bypass"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="5e0a14ed17680a7" memberName="swapLRButton"
-                virtualName="" explicitFocusOrder="0" pos="544 448 112 24" buttonText="Swap Left/Right"
+                virtualName="" explicitFocusOrder="0" pos="408 584 112 24" buttonText="Swap Left/Right"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="a4c7e40cc3b84fa1" memberName="rightGainLabel"
          virtualName="" explicitFocusOrder="0" pos="17 521 112 24" edTextCol="ff000000"
@@ -1173,11 +1144,11 @@ BEGIN_JUCER_METADATA
                 virtualName="" explicitFocusOrder="0" pos="292 585 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <COMBOBOX name="new combo box" id="68afb9201dff30b0" memberName="samplingBitsComboBox"
-            virtualName="" explicitFocusOrder="0" pos="527 552 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="263 616 150 24" editable="0"
             layout="33" items="16 bit&#10;24 bit&#10;32 bit" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="f3258eff2173a09d" memberName="samplingBitsLabel"
-         virtualName="" explicitFocusOrder="0" pos="422 552 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="158 616 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Sampling Bits" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
@@ -1185,26 +1156,26 @@ BEGIN_JUCER_METADATA
               virtualName="" explicitFocusOrder="0" pos="344 312 64 64" bgColOff="ff808080"
               buttonText="LED" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <COMBOBOX name="new combo box" id="8e9735eeb5b5f6cd" memberName="protocolComboBox"
-            virtualName="" explicitFocusOrder="0" pos="527 584 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="527 616 150 24" editable="0"
             layout="33" items="Philips&#10;MSB" textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="6f96ad882d073112" memberName="protocolLabel"
-         virtualName="" explicitFocusOrder="0" pos="422 584 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="422 616 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Protocol" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <TOGGLEBUTTON name="new toggle button" id="7ae50b59d73384c8" memberName="masterButton"
-                virtualName="" explicitFocusOrder="0" pos="664 448 71 24" buttonText="Master"
+                virtualName="" explicitFocusOrder="0" pos="80 616 71 24" buttonText="Master"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="2f07a4c0694077f7" memberName="statusLabel"
-         virtualName="" explicitFocusOrder="0" pos="384 424 336 16" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="384 456 336 16" edTextCol="ff000000"
          edBkgCol="0" labelText="Status: Initialising..." editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <COMBOBOX name="new combo box" id="8a0d565fbe220bde" memberName="patchSlotAComboBox"
-            virtualName="" explicitFocusOrder="0" pos="120 320 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="120 352 150 24" editable="0"
             layout="33" items="..." textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="54afa4d08d09d664" memberName="patchSlotALabel"
-         virtualName="" explicitFocusOrder="0" pos="48 320 72 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="48 352 72 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Patch" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="34"/>
@@ -1272,17 +1243,8 @@ BEGIN_JUCER_METADATA
          edBkgCol="0" labelText="E" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="1" italic="0" justification="36"/>
-  <COMBOBOX name="new combo box" id="f5aa30fb673ecdf6" memberName="modeComboBox"
-            virtualName="" explicitFocusOrder="0" pos="551 320 150 24" editable="0"
-            layout="33" items="Single&#10;Dual&#10;Series&#10;Parallel" textWhenNonSelected=""
-            textWhenNoItems="(no choices)"/>
-  <LABEL name="new label" id="78f6e256a96569d8" memberName="modeLabel"
-         virtualName="" explicitFocusOrder="0" pos="448 320 101 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="Patch Mode" editableSingleClick="0" editableDoubleClick="0"
-         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
-         bold="0" italic="0" justification="34"/>
   <TOGGLEBUTTON name="new toggle button" id="ae8c92622a32c986" memberName="remoteControlButton"
-                virtualName="" explicitFocusOrder="0" pos="184 448 112 24" buttonText="Remote Control"
+                virtualName="" explicitFocusOrder="0" pos="408 552 112 24" buttonText="Remote Control"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <COMBOBOX name="new combo box" id="732ba8655b6d4ba5" memberName="blockSizeComboBox"
             virtualName="" explicitFocusOrder="0" pos="526 488 150 24" editable="0"
@@ -1294,7 +1256,7 @@ BEGIN_JUCER_METADATA
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <TOGGLEBUTTON name="new toggle button" id="249af80ac06ed5fd" memberName="halfSpeedButton"
-                virtualName="" explicitFocusOrder="0" pos="304 448 112 24" buttonText="Half Speed"
+                virtualName="" explicitFocusOrder="0" pos="608 584 96 24" buttonText="Half Speed"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="6d4885422c01a4ba" memberName="messageLabel"
          virtualName="" explicitFocusOrder="0" pos="16 424 328 16" edTextCol="ff000000"
@@ -1302,7 +1264,7 @@ BEGIN_JUCER_METADATA
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <LABEL name="new label" id="b5ed8539fe8cf330" memberName="statsLabel"
-         virtualName="" explicitFocusOrder="0" pos="16 448 160 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="16 456 328 16" edTextCol="ff000000"
          edBkgCol="0" labelText="..." editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
@@ -1316,9 +1278,9 @@ END_JUCER_METADATA
 // Binary resources - be careful not to edit any of these sections!
 
 // JUCER_RESOURCE: owlFaceplate_png, 63100, "../../StompBox/drawings/Owl Faceplate.png"
-static const unsigned char resource_OwlControlGui_owlFaceplate_png[] = { 137,80,78,71,13,10,26,10,0,0,0,13,73,72,68,82,0,0,5,78,0,0,4,37,8,6,0,0,0,105,129,87,213,0,0,0,9,112,72,89,115,0,0,46,35,0,0,46,35,
-1,120,165,63,118,0,0,10,79,105,67,67,80,80,104,111,116,111,115,104,111,112,32,73,67,67,32,112,114,111,102,105,108,101,0,0,120,218,157,83,103,84,83,233,22,61,247,222,244,66,75,136,128,148,75,111,82,21,
-8,32,82,66,139,128,20,145,38,42,33,9,16,74,136,33,161,217,21,81,193,17,69,69,4,27,200,160,136,3,142,142,128,140,21,81,44,12,138,10,216,7,228,33,162,142,131,163,136,138,202,251,225,123,163,107,214,188,
+static const unsigned char resource_OwlControlGui_owlFaceplate_png[] = { 137,80,78,71,13,10,26,10,0,0,0,13,73,72,68,82,0,0,5,78,0,0,4,37,8,6,0,0,0,105,129,87,213,0,0,0,9,112,72,89,115,0,0,46,35,0,0,46,
+35,1,120,165,63,118,0,0,10,79,105,67,67,80,80,104,111,116,111,115,104,111,112,32,73,67,67,32,112,114,111,102,105,108,101,0,0,120,218,157,83,103,84,83,233,22,61,247,222,244,66,75,136,128,148,75,111,82,
+21,8,32,82,66,139,128,20,145,38,42,33,9,16,74,136,33,161,217,21,81,193,17,69,69,4,27,200,160,136,3,142,142,128,140,21,81,44,12,138,10,216,7,228,33,162,142,131,163,136,138,202,251,225,123,163,107,214,188,
 247,230,205,254,181,215,62,231,172,243,157,179,207,7,192,8,12,150,72,51,81,53,128,12,169,66,30,17,224,131,199,196,198,225,228,46,64,129,10,36,112,0,16,8,179,100,33,115,253,35,1,0,248,126,60,60,43,34,192,
 7,190,0,1,120,211,11,8,0,192,77,155,192,48,28,135,255,15,234,66,153,92,1,128,132,1,192,116,145,56,75,8,128,20,0,64,122,142,66,166,0,64,70,1,128,157,152,38,83,0,160,4,0,96,203,99,98,227,0,80,45,0,96,39,
 127,230,211,0,128,157,248,153,123,1,0,91,148,33,21,1,160,145,0,32,19,101,136,68,0,104,59,0,172,207,86,138,69,0,88,48,0,20,102,75,196,57,0,216,45,0,48,73,87,102,72,0,176,183,0,192,206,16,11,178,0,8,12,
