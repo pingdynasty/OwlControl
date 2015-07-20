@@ -129,6 +129,8 @@ private:
     ScopedPointer<ToggleButton> halfSpeedButton;
     ScopedPointer<Label> messageLabel;
     ScopedPointer<Label> statsLabel;
+    ScopedPointer<ComboBox> dataFormatComboBox;
+    ScopedPointer<Label> dataFormatLabel;
     Image cachedImage_owlFaceplate_png;
 
 

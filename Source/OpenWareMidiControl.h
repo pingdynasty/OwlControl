@@ -22,13 +22,15 @@ enum PatchButtonId {
 };
 
 #define SYSEX_CONFIGURATION_AUDIO_RATE            "FS"
-#define SYSEX_CONFIGURATION_AUDIO_WIDTH           "WH"
+#define SYSEX_CONFIGURATION_AUDIO_BITDEPTH        "BD"
+#define SYSEX_CONFIGURATION_AUDIO_DATAFORMAT      "DF"
 #define SYSEX_CONFIGURATION_AUDIO_BLOCKSIZE       "BS"
 #define SYSEX_CONFIGURATION_CODEC_PROTOCOL        "PT"
 #define SYSEX_CONFIGURATION_CODEC_MASTER          "MS"
 #define SYSEX_CONFIGURATION_CODEC_SWAP            "SW"
 #define SYSEX_CONFIGURATION_CODEC_BYPASS          "BY"
 #define SYSEX_CONFIGURATION_CODEC_HALFSPEED       "HS"
+
 
 enum OpenWareMidiSysexCommand {
   SYSEX_PRESET_NAME_COMMAND       = 0x01,
@@ -38,6 +40,7 @@ enum OpenWareMidiSysexCommand {
   SYSEX_FIRMWARE_UPLOAD           = 0x10,
   SYSEX_FIRMWARE_STORE            = 0x11,
   SYSEX_FIRMWARE_RUN              = 0x12,
+  SYSEX_FIRMWARE_FLASH            = 0x13,
   SYSEX_FIRMWARE_VERSION          = 0x20,
   SYSEX_DEVICE_ID                 = 0x21,
   SYSEX_PROGRAM_MESSAGE           = 0x22,
