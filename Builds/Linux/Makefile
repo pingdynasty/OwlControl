@@ -51,6 +51,7 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/FirmwareChecksumComponent_f3943560.o \
   $(OBJDIR)/ApplicationSettingsWindow_2723744.o \
   $(OBJDIR)/OwlControlGui_c26ebfa3.o \
   $(OBJDIR)/ApplicationConfiguration_4b5ea10f.o \
@@ -85,6 +86,11 @@ clean:
 strip:
 	@echo Stripping OwlControl
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
+
+$(OBJDIR)/FirmwareChecksumComponent_f3943560.o: ../../Source/FirmwareChecksumComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling FirmwareChecksumComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/ApplicationSettingsWindow_2723744.o: ../../Source/ApplicationSettingsWindow.cpp
 	-@mkdir -p $(OBJDIR)

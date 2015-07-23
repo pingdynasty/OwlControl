@@ -61,6 +61,7 @@ public:
     float midiToOutGainDb (int midiValue);
     void updateSensivity();
     void loadSysexPatchFromDisk();
+    void loadSysexFirmwareFromDisk();
 
     void getCommandInfo(CommandID commandID, ApplicationCommandInfo &result);
     void getAllCommands(Array< CommandID > &commands);

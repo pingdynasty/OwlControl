@@ -48,7 +48,8 @@ public:
   void sendSysexStream(InputStream* stream);
   /* void sendSysexMessage(); */
   void runSysexPatch();
-  void storeSysexPatch(uint8_t userSlot);
+  void storeSysexPatch(uint8_t slot);
+  void flashFirmware(uint32_t checksum);
 
 private:
   String programMessage;

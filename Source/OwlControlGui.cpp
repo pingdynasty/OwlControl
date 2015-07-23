@@ -22,6 +22,7 @@
 #include "Enums.h"
 #include "ApplicationConfiguration.h"
 #include "ApplicationCommands.h"
+#include "FirmwareChecksumComponent.h"
 
 //[/Headers]
 
@@ -1070,7 +1071,7 @@ float OwlControlGui::midiToOutGainDb(int midiValue){
 void OwlControlGui::loadSysexPatchFromDisk(){
   FileChooser chooser("Select Patch", ApplicationConfiguration::getApplicationDirectory(), "*.syx");
   if(!chooser.browseForFileToOpen()){
-    setStatus("Patch Select cancelled");
+    setStatus("Patch select cancelled");
     return;
   }
   File file = chooser.getResult();
@@ -1099,6 +1100,37 @@ void OwlControlGui::loadSysexPatchFromDisk(){
   }
 }
 
+void OwlControlGui::loadSysexFirmwareFromDisk(){
+  FileChooser chooser("Select Firmware", ApplicationConfiguration::getApplicationDirectory(), "*.syx");
+  if(!chooser.browseForFileToOpen()){
+    setStatus("Firmware select cancelled");
+    return;
+  }
+  File file = chooser.getResult();
+  FileInputStream* stream = file.createInputStream();
+  if(!stream->openedOk()){
+    AlertWindow::showMessageBoxAsync
+      (AlertWindow::WarningIcon, "File Error", "Failed to open file", "Continue");
+    return;
+  }
+  theSettings.sendSysexStream(stream);
+
+  ScopedPointer<FirmwareChecksumComponent> component;
+  component = new FirmwareChecksumComponent();
+
+  int response = DialogWindow::showModalDialog("Confirm firmware update", component, NULL, Colours::white, true);
+  if(response == 0){
+    uint32_t checksum = component->getChecksum().getHexValue32();
+#ifdef DEBUG
+    std::cout << "checksum 0x" << std::hex << (int)checksum << std::endl;
+#endif // DEBUG
+    setStatus("Sending Flash Firmware command");
+    theSettings.flashFirmware(checksum);
+  }else{
+    setStatus("Firmware update cancelled");
+  }
+}
+
 void OwlControlGui::getAllCommands(Array<CommandID> &commands){
   commands.add(ApplicationCommands::sendPatch);
   commands.add(ApplicationCommands::updateFirmware);
@@ -1109,10 +1141,10 @@ void OwlControlGui::getAllCommands(Array<CommandID> &commands){
 void OwlControlGui::getCommandInfo(CommandID commandID, ApplicationCommandInfo &result){
   switch(commandID){
   case ApplicationCommands::sendPatch:
-    result.setInfo("Load patch from file and send to device", String::empty, String::empty, 0);
+    result.setInfo("Load patch from file", String::empty, String::empty, 0);
     break;
   case ApplicationCommands::updateFirmware:
-    result.setInfo("Update OWL Firmware from file", String::empty, String::empty, 0);
+    result.setInfo("Update OWL Firmware", String::empty, String::empty, 0);
     break;
   case ApplicationCommands::checkForFirmwareUpdates:
     result.setInfo("Download firmware from server", String::empty, String::empty, 0);
@@ -1128,6 +1160,8 @@ bool OwlControlGui::perform(const InvocationInfo& info){
     loadSysexPatchFromDisk();
     break;
   case ApplicationCommands::updateFirmware:
+    loadSysexFirmwareFromDisk();
+    break;
   case ApplicationCommands::checkForFirmwareUpdates:
     break;
   case ApplicationCommands::applicationVersionInfo:

@@ -131,6 +131,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\FirmwareChecksumComponent.cpp"/>
     <ClCompile Include="..\..\Source\ApplicationSettingsWindow.cpp"/>
     <ClCompile Include="..\..\Source\OwlControlGui.cpp"/>
     <ClCompile Include="..\..\Source\ApplicationConfiguration.cpp"/>
@@ -1191,6 +1192,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\juce_gui_extra.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\FirmwareChecksumComponent.h"/>
     <ClInclude Include="..\..\Source\ApplicationSettingsWindow.h"/>
     <ClInclude Include="..\..\Source\OwlControlGui.h"/>
     <ClInclude Include="..\..\Source\ApplicationCommands.h"/>

@@ -287,3 +287,7 @@ void OwlControlSettings::storeSysexPatch(uint8_t userSlot){
     buf[1] = userSlot;
     theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::createSysExMessage(buf, sizeof(buf)));
 }
+
+void OwlControlSettings::flashFirmware(uint32_t checksum){
+
+}

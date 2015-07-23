@@ -283,6 +283,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\FirmwareChecksumComponent.cpp">
+      <Filter>OwlControl\Application\GUI</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ApplicationSettingsWindow.cpp">
       <Filter>OwlControl\Application\GUI</Filter>
     </ClCompile>
@@ -1446,6 +1449,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\FirmwareChecksumComponent.h">
+      <Filter>OwlControl\Application\GUI</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\ApplicationSettingsWindow.h">
       <Filter>OwlControl\Application\GUI</Filter>
     </ClInclude>
