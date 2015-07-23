@@ -21,6 +21,7 @@
 #include "OwlControlGui.h"
 #include "Enums.h"
 #include "ApplicationConfiguration.h"
+#include "ApplicationCommands.h"
 
 //[/Headers]
 
@@ -723,13 +724,13 @@ void OwlControlGui::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_loadButton] -- add your button handler code here..
         setStatus("Loading settings...");
         theSettings.clearMessages();
-        theSettings.loadFromOwl();
-	Thread::sleep(100);
+        // theSettings.loadFromOwl();
+	// Thread::sleep(100);
 	theSettings.setCc(REQUEST_SETTINGS, SYSEX_PRESET_NAME_COMMAND);
-	Thread::sleep(100);
-	theSettings.setCc(REQUEST_SETTINGS, SYSEX_PARAMETER_NAME_COMMAND);
-	Thread::sleep(100);
-	theSettings.setCc(REQUEST_SETTINGS, SYSEX_PROGRAM_STATS);
+	// Thread::sleep(100);
+	// theSettings.setCc(REQUEST_SETTINGS, SYSEX_PARAMETER_NAME_COMMAND);
+	// Thread::sleep(100);
+	// theSettings.setCc(REQUEST_SETTINGS, SYSEX_PROGRAM_STATS);
         //[/UserButtonCode_loadButton]
     }
     else if (buttonThatWasClicked == saveButton)
@@ -1066,6 +1067,82 @@ float OwlControlGui::midiToOutGainDb(int midiValue){
     else return midiValue-121;
 }
 
+void OwlControlGui::loadSysexPatchFromDisk(){
+  FileChooser chooser("Select Patch", ApplicationConfiguration::getApplicationDirectory(), "*.syx");
+  if(!chooser.browseForFileToOpen()){
+    setStatus("Patch Select cancelled");
+    return;
+  }
+  File file = chooser.getResult();
+  FileInputStream* stream = file.createInputStream();
+  if(!stream->openedOk()){
+    AlertWindow::showMessageBoxAsync
+      (AlertWindow::WarningIcon, "File Error", "Failed to open file", "Continue");
+    return;
+  }
+  theSettings.sendSysexStream(stream);
+  AlertWindow alert("Run or Store",
+		    "What would you like to do with the patch?",
+		    juce::AlertWindow::WarningIcon);
+  alert.addButton("Run", 0, juce::KeyPress(), juce::KeyPress());
+  alert.addButton("Store in slot 1", 1, juce::KeyPress(), juce::KeyPress());
+  alert.addButton("Store in slot 2", 2, juce::KeyPress(), juce::KeyPress());
+  alert.addButton("Store in slot 3", 3, juce::KeyPress(), juce::KeyPress());
+  alert.addButton("Store in slot 4", 4, juce::KeyPress(), juce::KeyPress());
+  int response = alert.runModalLoop();
+  if(response == 0){
+    setStatus("Sending Patch Run command");
+    theSettings.runSysexPatch();
+  }else{
+    setStatus("Sending Patch Store command for slot "+response);
+    theSettings.storeSysexPatch(response-1);
+  }
+}
+
+void OwlControlGui::getAllCommands(Array<CommandID> &commands){
+  commands.add(ApplicationCommands::sendPatch);
+  commands.add(ApplicationCommands::updateFirmware);
+  commands.add(ApplicationCommands::checkForFirmwareUpdates);
+  commands.add(ApplicationCommands::applicationVersionInfo);
+}
+
+void OwlControlGui::getCommandInfo(CommandID commandID, ApplicationCommandInfo &result){
+  switch(commandID){
+  case ApplicationCommands::sendPatch:
+    result.setInfo("Load patch from file and send to device", String::empty, String::empty, 0);
+    break;
+  case ApplicationCommands::updateFirmware:
+    result.setInfo("Update OWL Firmware from file", String::empty, String::empty, 0);
+    break;
+  case ApplicationCommands::checkForFirmwareUpdates:
+    result.setInfo("Download firmware from server", String::empty, String::empty, 0);
+    break;
+  case ApplicationCommands::applicationVersionInfo:
+    result.setInfo("About", String::empty, String::empty, 0);
+  }
+}
+
+bool OwlControlGui::perform(const InvocationInfo& info){
+  switch(info.commandID){
+  case ApplicationCommands::sendPatch:
+    loadSysexPatchFromDisk();
+    break;
+  case ApplicationCommands::updateFirmware:
+  case ApplicationCommands::checkForFirmwareUpdates:
+    break;
+  case ApplicationCommands::applicationVersionInfo:
+    AlertWindow alert("About", ApplicationConfiguration::getApplicationDescription(), juce::AlertWindow::InfoIcon);
+    alert.addButton("Close", 1, juce::KeyPress(), juce::KeyPress());
+    alert.runModalLoop();
+    break;
+  }
+  return true;
+}
+
+ApplicationCommandTarget* OwlControlGui::getNextCommandTarget(){
+  return NULL;
+}
+
 void OwlControlGui::timerCallback()
 {
     if ((Time::currentTimeMillis()-theSettings.getLastMidiMessageTime())>5*timerInterval)
@@ -1105,7 +1182,7 @@ void OwlControlGui::timerCallback()
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="OwlControlGui" componentName="MainGui"
-                 parentClasses="public Component, public Value::Listener, public Timer"
+                 parentClasses="public Component, public Value::Listener, public Timer, public ApplicationCommandTarget"
                  constructorParams="OwlControlSettings&amp; settings, AudioDeviceManager&amp; dm, Value&amp; updateGui"
                  variableInitialisers="theSettings(settings), theDm(dm)&#10;&#10;"
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"

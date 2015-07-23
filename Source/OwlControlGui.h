@@ -39,6 +39,7 @@
 class OwlControlGui  : public Component,
                        public Value::Listener,
                        public Timer,
+                       public ApplicationCommandTarget,
                        public ComboBoxListener,
                        public ButtonListener,
                        public SliderListener
@@ -59,6 +60,12 @@ public:
     float midiToInGainDb (int midiValue);
     float midiToOutGainDb (int midiValue);
     void updateSensivity();
+    void loadSysexPatchFromDisk();
+
+    void getCommandInfo(CommandID commandID, ApplicationCommandInfo &result);
+    void getAllCommands(Array< CommandID > &commands);
+    ApplicationCommandTarget* getNextCommandTarget();
+    bool perform(const InvocationInfo& info);
     //[/UserMethods]
 
     void paint (Graphics& g);

@@ -13,9 +13,9 @@ public:
     const String getApplicationName()       { return ProjectInfo::projectName; }
     const String getApplicationVersion()    { return ProjectInfo::versionString; }
     bool moreThanOneInstanceAllowed()       { return false; }
-    ScopedPointer<OwlControlGui> mainAppWindow;
     AudioDeviceManager dm;
     OwlControlSettings settings;
+    ScopedPointer<OwlControlGui> gui;
    
     Value updateGui; // flag used to update Gui when Owl settings are loaded
     
@@ -25,23 +25,21 @@ public:
     {
         DBG("Initialising OwlControl");
         ApplicationConfiguration::initialise();
+	gui = new OwlControlGui(settings, dm, updateGui);
         commands = new ApplicationCommandManager();
         commands->registerAllCommandsForTarget(this);
-        commands->registerAllCommandsForTarget(&settings);
-        commands->setFirstCommandTarget(&settings);
+        commands->registerAllCommandsForTarget(gui);
+	commands->setFirstCommandTarget(gui);
 
         // Initialize audio/midi device
         PropertySet* props = ApplicationConfiguration::getApplicationProperties();
         if(props->getBoolValue("show-low-level-items") != true)
-        {
-        dm.initialise(0, 0, nullptr, true);
-        }
+	  dm.initialise(0, 0, nullptr, true);
         else
-        {
-        dm.initialise(2, 2, nullptr, true);
-        }
+	  dm.initialise(2, 2, nullptr, true);
+
         // start GUI
-        mainWindow = new MainWindow(commands, settings, dm, updateGui);        
+        mainWindow = new MainWindow(commands, gui, dm, updateGui);        
 	mainWindow->addKeyListener(commands->getKeyMappings());
     }
 
@@ -80,13 +78,14 @@ public:
 #endif
       PopupMenu tools;
       toplevel.add("Tools");
-        
-      PropertySet* props = ApplicationConfiguration::getApplicationProperties();
+      tools.addCommandItem(commands, ApplicationCommands::sendPatch);
+      tools.addCommandItem(commands, ApplicationCommands::updateFirmware);
+      // tools.addCommandItem(commands, ApplicationCommands::checkForFirmwareUpdates);
       popups.add(tools);
         
       PopupMenu help;
       toplevel.add("Help");
-      help.addCommandItem(commands, ApplicationCommands::owlNestVersionInfo);
+      help.addCommandItem(commands, ApplicationCommands::applicationVersionInfo);
       popups.add(help);
     }
     StringArray getMenuBarNames(){
@@ -106,7 +105,7 @@ public:
     class MainWindow    : public DocumentWindow {
     public:
       MainWindow(ApplicationCommandManager* commands, 
-		 OwlControlSettings& settings, 
+		 OwlControlGui* gui,
 		 AudioDeviceManager& dm, 
 		 Value& updateGui)  : 
 	  DocumentWindow(JUCEApplication::getInstance()->getApplicationName(),
@@ -121,7 +120,7 @@ public:
 
 	tabs = new TabbedComponent(TabbedButtonBar::TabsAtTop);
 	setContentOwned(tabs, false);
-	tabs->addTab("Main", Colours::lightgrey, new OwlControlGui(settings, dm, updateGui), true, 1);
+	tabs->addTab("Main", Colours::lightgrey, gui, true, 1);
 	tabs->addTab("Application Settings", Colours::lightgrey, new ApplicationSettingsWindow(dm), true, 2);
     PropertySet* props = ApplicationConfiguration::getApplicationProperties();
 	tabs->setSize(779, 700);

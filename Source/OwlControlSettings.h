@@ -14,7 +14,7 @@
 
 #define NB_CHANNELS 128 
 
-class OwlControlSettings: public MidiInputCallback, public ApplicationCommandTarget {
+class OwlControlSettings: public MidiInputCallback {
 public:
   OwlControlSettings(AudioDeviceManager& dm, Value& updateGui);
   ~OwlControlSettings();
@@ -32,10 +32,6 @@ public:
   String getFirmwareVersion();
   uint64 getLastMidiMessageTime();
   // bool isConnected();
-  void getCommandInfo(CommandID commandID, ApplicationCommandInfo &result);
-  void getAllCommands(Array< CommandID > &commands);
-  ApplicationCommandTarget* getNextCommandTarget();
-  bool perform(const InvocationInfo& info);
   int getConfigurationValue(const char* name);
   void setConfigurationValue(const char* name, int value);
   void storeFirmware(uint8_t slot);
@@ -49,6 +45,11 @@ public:
   String getStatsMessage(){
     return statsMessage;
   }
+  void sendSysexStream(InputStream* stream);
+  /* void sendSysexMessage(); */
+  void runSysexPatch();
+  void storeSysexPatch(uint8_t userSlot);
+
 private:
   String programMessage;
   String statsMessage;

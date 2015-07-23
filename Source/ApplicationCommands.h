@@ -2,9 +2,12 @@
 #define APPLICATIONCOMMANDS_H_INCLUDED
 
 namespace ApplicationCommands {
-enum ApplicationCommands {
-  owlNestVersionInfo = 0x2005
-};
+  enum ApplicationCommands {
+    updateFirmware = 0x2001,
+    checkForFirmwareUpdates = 0x2002,
+    sendPatch = 0x2003,
+    applicationVersionInfo = 0x2005
+  };
 }
 
 #endif  // APPLICATIONCOMMANDS_H_INCLUDED

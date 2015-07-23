@@ -40,6 +40,8 @@ String OwlControlSettings::getFirmwareVersion(){
 }
 
 void OwlControlSettings::handlePresetNameMessage(uint8_t index, const char* name, int size){
+  while(index>presets.size())
+    presets.add("---");
   presets.set(index, String(name, size));
 #ifdef DEBUG
   std::cout << "preset name " << (int)index << ": " << String(name, size) << std::endl;
@@ -261,29 +263,27 @@ uint64 OwlControlSettings::getLastMidiMessageTime(){
     return lastMidiMessageTime;
 }
 
-
-void OwlControlSettings::getAllCommands(Array<CommandID> &commands){
-  commands.add(ApplicationCommands::owlNestVersionInfo);
+void OwlControlSettings::sendSysexStream(InputStream* stream){
+  // uint8_t msg[256];
+  // do{    
+  // }while(stream.ready());
+  // void* data = malloc(stream->getTotalLength());
+  // stream->read(data, stream->getTotalLength());
+  // if(theDm.getDefaultMidiOutput() != nullptr){
+  //   theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage(data, stream->getTotalLength()));
+  // }
+  // data = nullptr;
 }
 
-void OwlControlSettings::getCommandInfo(CommandID commandID, ApplicationCommandInfo &result){
-  switch(commandID){
-  case ApplicationCommands::owlNestVersionInfo:
-    result.setInfo("About", String::empty, String::empty, 0);
-  }
+void OwlControlSettings::runSysexPatch(){
+    uint8_t buf[1];
+    buf[0] = SYSEX_FIRMWARE_RUN;
+    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::createSysExMessage(buf, sizeof(buf)));
 }
 
-bool OwlControlSettings::perform(const InvocationInfo& info){
-  switch(info.commandID){
-  case ApplicationCommands::owlNestVersionInfo:
-    AlertWindow alert("About", ApplicationConfiguration::getApplicationDescription(), juce::AlertWindow::InfoIcon);
-    alert.addButton("Close", 1, juce::KeyPress(), juce::KeyPress());
-    alert.runModalLoop();
-    break;          
-  }
-  return true;
-}
-
-ApplicationCommandTarget* OwlControlSettings::getNextCommandTarget(){
-  return NULL;
+void OwlControlSettings::storeSysexPatch(uint8_t userSlot){
+    uint8_t buf[2];
+    buf[0] = SYSEX_FIRMWARE_STORE;
+    buf[1] = userSlot;
+    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::createSysExMessage(buf, sizeof(buf)));
 }
