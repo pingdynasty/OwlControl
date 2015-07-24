@@ -45,8 +45,7 @@ public:
   String getStatsMessage(){
     return statsMessage;
   }
-  void sendSysexStream(InputStream* stream);
-  /* void sendSysexMessage(); */
+  void sendSysexMessage(InputStream* stream);
   void runSysexPatch();
   void storeSysexPatch(uint8_t slot);
   void flashFirmware(uint32_t checksum);

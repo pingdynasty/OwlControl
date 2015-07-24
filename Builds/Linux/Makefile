@@ -51,6 +51,7 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/sysex_4a684601.o \
   $(OBJDIR)/FirmwareChecksumComponent_f3943560.o \
   $(OBJDIR)/ApplicationSettingsWindow_2723744.o \
   $(OBJDIR)/OwlControlGui_c26ebfa3.o \
@@ -86,6 +87,11 @@ clean:
 strip:
 	@echo Stripping OwlControl
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
+
+$(OBJDIR)/sysex_4a684601.o: ../../Source/sysex.c
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling sysex.c"
+	@$(CC) $(CFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/FirmwareChecksumComponent_f3943560.o: ../../Source/FirmwareChecksumComponent.cpp
 	-@mkdir -p $(OBJDIR)

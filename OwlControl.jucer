@@ -5,6 +5,8 @@
               jucerVersion="3.1.0" companyName="Rebel Technology">
   <MAINGROUP id="nyhdga" name="OwlControl">
     <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Application">
+      <FILE id="hzp2Fv" name="sysex.c" compile="1" resource="0" file="Source/sysex.c"/>
+      <FILE id="q2VLoc" name="sysex.h" compile="0" resource="0" file="Source/sysex.h"/>
       <GROUP id="{DB625BC2-D638-342B-46F0-2C11332BEE69}" name="GUI">
         <FILE id="P6mSXQ" name="FirmwareChecksumComponent.cpp" compile="1"
               resource="0" file="Source/FirmwareChecksumComponent.cpp"/>

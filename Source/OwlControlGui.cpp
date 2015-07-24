@@ -530,38 +530,38 @@ void OwlControlGui::paint (Graphics& g)
 
 void OwlControlGui::resized()
 {
-    samplingRateComboBox->setBounds (512, 504, 150, 24);
-    samplingRateLabel->setBounds (407, 504, 103, 24);
+    samplingRateComboBox->setBounds (512, 501, 150, 24);
+    samplingRateLabel->setBounds (407, 501, 103, 24);
     loadButton->setBounds (56, 392, 150, 24);
-    leftGainSlider->setBounds (132, 476, 150, 24);
-    leftGainLabel->setBounds (17, 476, 112, 24);
+    leftGainSlider->setBounds (132, 472, 150, 24);
+    leftGainLabel->setBounds (17, 472, 112, 24);
     saveButton->setBounds (216, 392, 150, 24);
     deviceInfoButton->setBounds (384, 392, 150, 24);
-    bypassButton->setBounds (527, 568, 72, 24);
-    swapLRButton->setBounds (407, 568, 112, 24);
-    rightGainLabel->setBounds (17, 505, 112, 24);
-    rightGainSlider->setBounds (132, 505, 150, 24);
-    leftOutGainSlider->setBounds (132, 540, 150, 24);
-    leftOutGainLabel->setBounds (16, 540, 120, 24);
-    rightOutGainLabel->setBounds (16, 569, 120, 24);
-    rightOutGainSlider->setBounds (132, 569, 150, 24);
-    leftInputMuteButton->setBounds (292, 476, 100, 24);
-    rightInputMuteButton->setBounds (292, 505, 100, 24);
-    leftOutputMuteButton->setBounds (292, 540, 100, 24);
-    rightOutputMuteButton->setBounds (292, 569, 100, 24);
-    samplingBitsComboBox->setBounds (368, 600, 73, 24);
-    samplingBitsLabel->setBounds (291, 600, 69, 24);
+    bypassButton->setBounds (527, 562, 72, 24);
+    swapLRButton->setBounds (407, 562, 112, 24);
+    rightGainLabel->setBounds (17, 501, 112, 24);
+    rightGainSlider->setBounds (132, 501, 150, 24);
+    leftOutGainSlider->setBounds (132, 533, 150, 24);
+    leftOutGainLabel->setBounds (16, 533, 120, 24);
+    rightOutGainLabel->setBounds (16, 562, 120, 24);
+    rightOutGainSlider->setBounds (132, 562, 150, 24);
+    leftInputMuteButton->setBounds (292, 472, 100, 24);
+    rightInputMuteButton->setBounds (292, 501, 100, 24);
+    leftOutputMuteButton->setBounds (292, 533, 100, 24);
+    rightOutputMuteButton->setBounds (292, 562, 100, 24);
+    samplingBitsComboBox->setBounds (443, 616, 73, 24);
+    samplingBitsLabel->setBounds (366, 616, 69, 24);
     ledButton->setBounds (344, 312, 64, 64);
-    protocolComboBox->setBounds (547, 600, 113, 24);
-    protocolLabel->setBounds (484, 600, 61, 24);
-    masterButton->setBounds (527, 536, 71, 24);
-    statusLabel->setBounds (384, 449, 336, 16);
+    protocolComboBox->setBounds (591, 616, 113, 24);
+    protocolLabel->setBounds (524, 616, 61, 24);
+    masterButton->setBounds (527, 533, 71, 24);
+    statusLabel->setBounds (40, 424, 336, 16);
     patchSlotAComboBox->setBounds (120, 352, 150, 24);
     patchSlotALabel->setBounds (48, 352, 72, 24);
     resetButton->setBounds (544, 392, 150, 24);
     sensitivityComboBox->setBounds (552, 352, 150, 24);
     sensitivityLabel->setBounds (448, 352, 101, 24);
-    connectionButton->setBounds (370, 424, 16, 16);
+    connectionButton->setBounds (16, 424, 16, 16);
     slider4->setBounds (536, 29, 90, 90);
     slider3->setBounds (399, 29, 90, 90);
     label3->setBounds (399, 114, 90, 24);
@@ -572,14 +572,14 @@ void OwlControlGui::resized()
     slider2->setBounds (264, 29, 90, 90);
     slider5->setBounds (621, 144, 72, 139);
     label5->setBounds (608, 282, 96, 24);
-    remoteControlButton->setBounds (407, 536, 112, 24);
+    remoteControlButton->setBounds (407, 533, 112, 24);
     blockSizeComboBox->setBounds (512, 472, 150, 24);
     blockSizeeLabel->setBounds (407, 472, 103, 24);
-    halfSpeedButton->setBounds (607, 568, 96, 24);
-    messageLabel->setBounds (16, 424, 344, 16);
-    statsLabel->setBounds (16, 449, 360, 16);
-    dataFormatComboBox->setBounds (208, 600, 73, 24);
-    dataFormatLabel->setBounds (120, 600, 80, 24);
+    halfSpeedButton->setBounds (607, 562, 96, 24);
+    messageLabel->setBounds (384, 448, 312, 16);
+    statsLabel->setBounds (16, 448, 360, 16);
+    dataFormatComboBox->setBounds (285, 616, 73, 24);
+    dataFormatLabel->setBounds (197, 616, 80, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -725,13 +725,13 @@ void OwlControlGui::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_loadButton] -- add your button handler code here..
         setStatus("Loading settings...");
         theSettings.clearMessages();
-        // theSettings.loadFromOwl();
-	// Thread::sleep(100);
+        theSettings.loadFromOwl();
+	Thread::sleep(100);
 	theSettings.setCc(REQUEST_SETTINGS, SYSEX_PRESET_NAME_COMMAND);
-	// Thread::sleep(100);
-	// theSettings.setCc(REQUEST_SETTINGS, SYSEX_PARAMETER_NAME_COMMAND);
-	// Thread::sleep(100);
-	// theSettings.setCc(REQUEST_SETTINGS, SYSEX_PROGRAM_STATS);
+	Thread::sleep(100);
+	theSettings.setCc(REQUEST_SETTINGS, SYSEX_PARAMETER_NAME_COMMAND);
+	Thread::sleep(100);
+	theSettings.setCc(REQUEST_SETTINGS, SYSEX_PROGRAM_STATS);
         //[/UserButtonCode_loadButton]
     }
     else if (buttonThatWasClicked == saveButton)
@@ -1068,24 +1068,49 @@ float OwlControlGui::midiToOutGainDb(int midiValue){
     else return midiValue-121;
 }
 
+#define SYSEX_MESSAGE_DELAY_MS 20
+class SysexProgressTask : public juce::ThreadWithProgressWindow {
+private:
+  OwlControlSettings* settings;
+public:
+    SysexProgressTask(OwlControlSettings* s)
+      : ThreadWithProgressWindow ("Sending Sysex", true, true), settings(s) {}
+  void run(){
+    FileChooser chooser("Select File", ApplicationConfiguration::getApplicationDirectory(), "*.syx");
+    if(!chooser.browseForFileToOpen()){
+      setStatusMessage("No file selected");
+    }else{
+      File file = chooser.getResult();
+      double packages = file.getSize()/256.0;
+      FileInputStream* stream = file.createInputStream();
+      if(!stream->openedOk()){
+	setStatusMessage("Failed to open file");
+      }else{
+	for(int i=0;!stream->isExhausted() && !threadShouldExit(); ++i){
+	  settings->sendSysexMessage(stream);
+	  setProgress(i/packages);
+	  sleep(SYSEX_MESSAGE_DELAY_MS);
+	}
+      }
+    }
+  }
+};
+
 void OwlControlGui::loadSysexPatchFromDisk(){
-  FileChooser chooser("Select Patch", ApplicationConfiguration::getApplicationDirectory(), "*.syx");
-  if(!chooser.browseForFileToOpen()){
-    setStatus("Patch select cancelled");
+  bool restorePollDevice = doPollDevice;
+  doPollDevice = false;
+  SysexProgressTask task(&theSettings);
+  if(task.runThread()){
+    setStatus("Patch send complete");
+  }else{
+    setStatus("Patch send cancelled");
     return;
   }
-  File file = chooser.getResult();
-  FileInputStream* stream = file.createInputStream();
-  if(!stream->openedOk()){
-    AlertWindow::showMessageBoxAsync
-      (AlertWindow::WarningIcon, "File Error", "Failed to open file", "Continue");
-    return;
-  }
-  theSettings.sendSysexStream(stream);
   AlertWindow alert("Run or Store",
 		    "What would you like to do with the patch?",
-		    juce::AlertWindow::WarningIcon);
+		    juce::AlertWindow::InfoIcon);
   alert.addButton("Run", 0, juce::KeyPress(), juce::KeyPress());
+  // todo: alert.addComboBox() / getComboBoxComponent()
   alert.addButton("Store in slot 1", 1, juce::KeyPress(), juce::KeyPress());
   alert.addButton("Store in slot 2", 2, juce::KeyPress(), juce::KeyPress());
   alert.addButton("Store in slot 3", 3, juce::KeyPress(), juce::KeyPress());
@@ -1098,29 +1123,23 @@ void OwlControlGui::loadSysexPatchFromDisk(){
     setStatus("Sending Patch Store command for slot "+response);
     theSettings.storeSysexPatch(response-1);
   }
+  doPollDevice = restorePollDevice;
 }
 
 void OwlControlGui::loadSysexFirmwareFromDisk(){
-  FileChooser chooser("Select Firmware", ApplicationConfiguration::getApplicationDirectory(), "*.syx");
-  if(!chooser.browseForFileToOpen()){
-    setStatus("Firmware select cancelled");
+  bool restorePollDevice = doPollDevice;
+  doPollDevice = false;
+  SysexProgressTask task(&theSettings);
+  if(task.runThread()){
+    setStatus("Firmware send complete");
+  }else{
+    setStatus("Firmware send cancelled");
     return;
   }
-  File file = chooser.getResult();
-  FileInputStream* stream = file.createInputStream();
-  if(!stream->openedOk()){
-    AlertWindow::showMessageBoxAsync
-      (AlertWindow::WarningIcon, "File Error", "Failed to open file", "Continue");
-    return;
-  }
-  theSettings.sendSysexStream(stream);
-
-  ScopedPointer<FirmwareChecksumComponent> component;
-  component = new FirmwareChecksumComponent();
-
-  int response = DialogWindow::showModalDialog("Confirm firmware update", component, NULL, Colours::white, true);
+  FirmwareChecksumComponent component;
+  int response = DialogWindow::showModalDialog("Confirm firmware update", &component, NULL, Colours::white, true);
   if(response == 0){
-    uint32_t checksum = component->getChecksum().getHexValue32();
+    uint32_t checksum = component.getChecksum().getHexValue32();
 #ifdef DEBUG
     std::cout << "checksum 0x" << std::hex << (int)checksum << std::endl;
 #endif // DEBUG
@@ -1129,6 +1148,7 @@ void OwlControlGui::loadSysexFirmwareFromDisk(){
   }else{
     setStatus("Firmware update cancelled");
   }
+  doPollDevice = restorePollDevice;
 }
 
 void OwlControlGui::getAllCommands(Array<CommandID> &commands){
@@ -1177,16 +1197,14 @@ ApplicationCommandTarget* OwlControlGui::getNextCommandTarget(){
   return NULL;
 }
 
-void OwlControlGui::timerCallback()
-{
-    if ((Time::currentTimeMillis()-theSettings.getLastMidiMessageTime())>5*timerInterval)
-    {
-        connectionButton->setColour(TextButton::buttonColourId, Colour::fromRGB(0xff, 0, 0)); // red
-    }
-    else
-    {
-        connectionButton->setColour(TextButton::buttonColourId, Colour::fromRGB(0, 0xff, 0)); // green
-    }
+void OwlControlGui::timerCallback(){
+  if ((Time::currentTimeMillis()-theSettings.getLastMidiMessageTime())<5*timerInterval)
+    connectionButton->setColour(TextButton::buttonColourId, Colours::green);
+  else if(!doPollDevice)
+    connectionButton->setColour(TextButton::buttonColourId, Colours::yellow);
+  else
+    connectionButton->setColour(TextButton::buttonColourId, Colours::red);
+  if(doPollDevice){
     static int counter = 0;
     switch(counter++){
     case 0:
@@ -1202,6 +1220,7 @@ void OwlControlGui::timerCallback()
       counter = 0;
       break;
     }
+  }
 }
 //[/MiscUserCode]
 
@@ -1226,11 +1245,11 @@ BEGIN_JUCER_METADATA
            mode="1"/>
   </BACKGROUND>
   <COMBOBOX name="new combo box" id="7eed9fbfa06bf85b" memberName="samplingRateComboBox"
-            virtualName="" explicitFocusOrder="0" pos="512 504 150 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="512 501 150 24" editable="0"
             layout="33" items="8 kHz&#10;32 kHz&#10;48 kHz&#10;96 kHz" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="aedcbbc865265e" memberName="samplingRateLabel"
-         virtualName="" explicitFocusOrder="0" pos="407 504 103 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="407 501 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Sampling Rate" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
@@ -1238,11 +1257,11 @@ BEGIN_JUCER_METADATA
               virtualName="" explicitFocusOrder="0" pos="56 392 150 24" buttonText="Load from OWL"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <SLIDER name="new slider" id="ce099269a95e9cf7" memberName="leftGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="132 476 150 24" min="-34.5"
+          virtualName="" explicitFocusOrder="0" pos="132 472 150 24" min="-34.5"
           max="12" int="1.5" style="LinearHorizontal" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="2138fad0eb10f8ee" memberName="leftGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="17 476 112 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="17 472 112 24" edTextCol="ff000000"
          edBkgCol="0" labelText="dB Input Gain L" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
@@ -1253,56 +1272,56 @@ BEGIN_JUCER_METADATA
               virtualName="" explicitFocusOrder="0" pos="384 392 150 24" buttonText="Device Info"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="new toggle button" id="2c9068f31b4a945b" memberName="bypassButton"
-                virtualName="" explicitFocusOrder="0" pos="527 568 72 24" buttonText="Bypass"
+                virtualName="" explicitFocusOrder="0" pos="527 562 72 24" buttonText="Bypass"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="5e0a14ed17680a7" memberName="swapLRButton"
-                virtualName="" explicitFocusOrder="0" pos="407 568 112 24" buttonText="Swap Left/Right"
+                virtualName="" explicitFocusOrder="0" pos="407 562 112 24" buttonText="Swap Left/Right"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="a4c7e40cc3b84fa1" memberName="rightGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="17 505 112 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="17 501 112 24" edTextCol="ff000000"
          edBkgCol="0" labelText="dB Input Gain R" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <SLIDER name="new slider" id="751638225df21da5" memberName="rightGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="132 505 150 24" min="-34.5"
+          virtualName="" explicitFocusOrder="0" pos="132 501 150 24" min="-34.5"
           max="12" int="1.5" style="LinearHorizontal" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="new slider" id="59927295068e5acd" memberName="leftOutGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="132 540 150 24" min="-73"
+          virtualName="" explicitFocusOrder="0" pos="132 533 150 24" min="-73"
           max="6" int="1" style="LinearHorizontal" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="d2acb69e045cd837" memberName="leftOutGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="16 540 120 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="16 533 120 24" edTextCol="ff000000"
          edBkgCol="0" labelText="dB Output Gain L" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <LABEL name="new label" id="f61d9f9ae7e5f004" memberName="rightOutGainLabel"
-         virtualName="" explicitFocusOrder="0" pos="16 569 120 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="16 562 120 24" edTextCol="ff000000"
          edBkgCol="0" labelText="dB Output Gain R" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <SLIDER name="new slider" id="e520e83dc8199cec" memberName="rightOutGainSlider"
-          virtualName="" explicitFocusOrder="0" pos="132 569 150 24" min="-73"
+          virtualName="" explicitFocusOrder="0" pos="132 562 150 24" min="-73"
           max="6" int="1" style="LinearHorizontal" textBoxPos="TextBoxRight"
           textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
   <TOGGLEBUTTON name="new toggle button" id="c3d4453ea3e0bad0" memberName="leftInputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="292 476 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="292 472 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="9d0155fca059ad2b" memberName="rightInputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="292 505 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="292 501 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="e8b8a82e4cc96eab" memberName="leftOutputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="292 540 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="292 533 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="47ae93ef5d84135f" memberName="rightOutputMuteButton"
-                virtualName="" explicitFocusOrder="0" pos="292 569 100 24" buttonText="Mute"
+                virtualName="" explicitFocusOrder="0" pos="292 562 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <COMBOBOX name="new combo box" id="68afb9201dff30b0" memberName="samplingBitsComboBox"
-            virtualName="" explicitFocusOrder="0" pos="368 600 73 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="443 616 73 24" editable="0"
             layout="33" items="16 bit&#10;24 bit&#10;32 bit" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="f3258eff2173a09d" memberName="samplingBitsLabel"
-         virtualName="" explicitFocusOrder="0" pos="291 600 69 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="366 616 69 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Bitdepth" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
@@ -1310,18 +1329,18 @@ BEGIN_JUCER_METADATA
               virtualName="" explicitFocusOrder="0" pos="344 312 64 64" bgColOff="ff808080"
               buttonText="LED" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <COMBOBOX name="new combo box" id="8e9735eeb5b5f6cd" memberName="protocolComboBox"
-            virtualName="" explicitFocusOrder="0" pos="547 600 113 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="591 616 113 24" editable="0"
             layout="33" items="Philips&#10;MSB" textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="6f96ad882d073112" memberName="protocolLabel"
-         virtualName="" explicitFocusOrder="0" pos="484 600 61 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="524 616 61 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Protocol" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <TOGGLEBUTTON name="new toggle button" id="7ae50b59d73384c8" memberName="masterButton"
-                virtualName="" explicitFocusOrder="0" pos="527 536 71 24" buttonText="Master"
+                virtualName="" explicitFocusOrder="0" pos="527 533 71 24" buttonText="Master"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="2f07a4c0694077f7" memberName="statusLabel"
-         virtualName="" explicitFocusOrder="0" pos="384 449 336 16" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="40 424 336 16" edTextCol="ff000000"
          edBkgCol="0" labelText="Status: Initialising..." editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
@@ -1345,7 +1364,7 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="34"/>
   <TEXTBUTTON name="new button" id="295a2bbf61be8607" memberName="connectionButton"
-              virtualName="" explicitFocusOrder="0" pos="370 424 16 16" bgColOff="ff808080"
+              virtualName="" explicitFocusOrder="0" pos="16 424 16 16" bgColOff="ff808080"
               buttonText="" connectedEdges="0" needsCallback="0" radioGroupId="0"/>
   <SLIDER name="new slider" id="1c26ed829054fb4" memberName="slider4" virtualName=""
           explicitFocusOrder="0" pos="536 29 90 90" bkgcol="fff0ffff" thumbcol="ff6495ed"
@@ -1398,7 +1417,7 @@ BEGIN_JUCER_METADATA
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="1" italic="0" justification="36"/>
   <TOGGLEBUTTON name="new toggle button" id="ae8c92622a32c986" memberName="remoteControlButton"
-                virtualName="" explicitFocusOrder="0" pos="407 536 112 24" buttonText="Remote Control"
+                virtualName="" explicitFocusOrder="0" pos="407 533 112 24" buttonText="Remote Control"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <COMBOBOX name="new combo box" id="732ba8655b6d4ba5" memberName="blockSizeComboBox"
             virtualName="" explicitFocusOrder="0" pos="512 472 150 24" editable="0"
@@ -1410,24 +1429,24 @@ BEGIN_JUCER_METADATA
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <TOGGLEBUTTON name="new toggle button" id="249af80ac06ed5fd" memberName="halfSpeedButton"
-                virtualName="" explicitFocusOrder="0" pos="607 568 96 24" buttonText="Half Speed"
+                virtualName="" explicitFocusOrder="0" pos="607 562 96 24" buttonText="Half Speed"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <LABEL name="new label" id="6d4885422c01a4ba" memberName="messageLabel"
-         virtualName="" explicitFocusOrder="0" pos="16 424 344 16" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="384 448 312 16" edTextCol="ff000000"
          edBkgCol="0" labelText="..." editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <LABEL name="new label" id="b5ed8539fe8cf330" memberName="statsLabel"
-         virtualName="" explicitFocusOrder="0" pos="16 449 360 16" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="16 448 360 16" edTextCol="ff000000"
          edBkgCol="0" labelText="..." editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <COMBOBOX name="new combo box" id="d6daa5419bdd3ea7" memberName="dataFormatComboBox"
-            virtualName="" explicitFocusOrder="0" pos="208 600 73 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="285 616 73 24" editable="0"
             layout="33" items="16 bit&#10;24 bit&#10;32 bit" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="37f4fd6a364a5ac2" memberName="dataFormatLabel"
-         virtualName="" explicitFocusOrder="0" pos="120 600 80 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="197 616 80 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Dataformat" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>

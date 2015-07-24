@@ -120,7 +120,7 @@ public:
 
 	tabs = new TabbedComponent(TabbedButtonBar::TabsAtTop);
 	setContentOwned(tabs, false);
-	tabs->addTab("Main", Colours::lightgrey, gui, true, 1);
+	tabs->addTab("Main", Colours::lightgrey, gui, false, 1);
 	tabs->addTab("Application Settings", Colours::lightgrey, new ApplicationSettingsWindow(dm), true, 2);
     PropertySet* props = ApplicationConfiguration::getApplicationProperties();
 	tabs->setSize(779, 700);

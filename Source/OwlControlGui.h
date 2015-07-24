@@ -86,6 +86,7 @@ private:
     AudioDeviceManager& theDm;
     ScopedPointer<AudioDeviceSelectorComponent> audioSelector;
     uint32 timerInterval;
+    bool doPollDevice = true;
     //[/UserVariables]
 
     //==============================================================================

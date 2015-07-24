@@ -283,6 +283,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\sysex.c">
+      <Filter>OwlControl\Application</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FirmwareChecksumComponent.cpp">
       <Filter>OwlControl\Application\GUI</Filter>
     </ClCompile>
@@ -1449,6 +1452,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\sysex.h">
+      <Filter>OwlControl\Application</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\FirmwareChecksumComponent.h">
       <Filter>OwlControl\Application\GUI</Filter>
     </ClInclude>
