@@ -48,9 +48,9 @@ File ApplicationConfiguration::getApplicationDirectory(){
 }
 
 String ApplicationConfiguration::getApplicationDescription(){
-  return "OwlControl v0.1" + newLine
+  return "OwlControl v0.2" + newLine
     + "Built by the OWL Team" + newLine
-    + "see hoxtonowl.com for more information";
+    + "see http://hoxtonowl.com for more information";
 }
 
 void ApplicationConfiguration::release(){
