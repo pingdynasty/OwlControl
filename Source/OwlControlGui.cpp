@@ -7,12 +7,12 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Introjucer version: 3.1.0
+  Created with Introjucer version: 3.2.0
 
   ------------------------------------------------------------------------------
 
   The Introjucer is part of the JUCE library - "Jules' Utility Class Extensions"
-  Copyright 2004-13 by Raw Material Software Ltd.
+  Copyright (c) 2015 - ROLI Ltd.
 
   ==============================================================================
 */
@@ -36,6 +36,9 @@
 OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& dm, Value& updateGui)
     : theSettings(settings), theDm(dm)
 {
+    //[Constructor_pre] You can add your own custom stuff here..
+    //[/Constructor_pre]
+
     setName ("MainGui");
     addAndMakeVisible (samplingRateComboBox = new ComboBox ("new combo box"));
     samplingRateComboBox->setEditableText (false);
@@ -387,7 +390,7 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
     dataFormatLabel->setColour (TextEditor::textColourId, Colours::black);
     dataFormatLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    cachedImage_owlFaceplate_png = ImageCache::getFromMemory (owlFaceplate_png, owlFaceplate_pngSize);
+    cachedImage_owlFaceplate_png_1 = ImageCache::getFromMemory (owlFaceplate_png, owlFaceplate_pngSize);
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -520,7 +523,7 @@ void OwlControlGui::paint (Graphics& g)
     g.fillAll (Colours::white);
 
     g.setColour (Colours::black.withAlpha (0.258f));
-    g.drawImageWithin (cachedImage_owlFaceplate_png,
+    g.drawImageWithin (cachedImage_owlFaceplate_png_1,
                        -10, -68, 780, 700,
                        RectanglePlacement::centred,
                        false);
@@ -531,6 +534,9 @@ void OwlControlGui::paint (Graphics& g)
 
 void OwlControlGui::resized()
 {
+    //[UserPreResize] Add your own custom resize code here..
+    //[/UserPreResize]
+
     samplingRateComboBox->setBounds (512, 501, 150, 24);
     samplingRateLabel->setBounds (407, 501, 103, 24);
     loadButton->setBounds (56, 392, 150, 24);
@@ -1148,6 +1154,7 @@ void OwlControlGui::loadSysexFirmwareFromDisk(){
 #endif // DEBUG
 	setStatus("Sending Flash Firmware command");
 	theSettings.flashFirmware(checksum);
+	AlertWindow::showMessageBoxAsync(AlertWindow::InfoIcon, "Firmware Updated", "Restart this program to reconnect");
       }else{
 	setStatus("Firmware update cancelled");
       }
