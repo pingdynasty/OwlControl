@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="cjPLB4" name="OwlControl" projectType="guiapp" version="1.0.0"
               bundleIdentifier="com.pingdynasty.OwlControl" includeBinaryInAppConfig="1"
-              jucerVersion="3.1.0" companyName="Rebel Technology">
+              jucerVersion="3.2.0" companyName="Rebel Technology">
   <MAINGROUP id="nyhdga" name="OwlControl">
     <GROUP id="{D080C941-02CB-B80A-E94B-8D98141024DE}" name="Application">
       <FILE id="hzp2Fv" name="sysex.c" compile="1" resource="0" file="Source/sysex.c"/>
@@ -51,7 +51,6 @@
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="1"/>
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_gui_audio" showAllCode="1" useLocalCopy="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
   </MODULES>
@@ -70,7 +69,6 @@
       <MODULEPATHS>
         <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
@@ -93,7 +91,6 @@
       <MODULEPATHS>
         <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
@@ -118,7 +115,6 @@
       <MODULEPATHS>
         <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
@@ -146,7 +142,6 @@
         <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_audio_utils" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
@@ -170,7 +165,6 @@
       <MODULEPATHS>
         <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
