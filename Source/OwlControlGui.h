@@ -140,6 +140,7 @@ private:
     ScopedPointer<Label> statsLabel;
     ScopedPointer<ComboBox> dataFormatComboBox;
     ScopedPointer<Label> dataFormatLabel;
+    ScopedPointer<ToggleButton> pollDeviceButton;
     Image cachedImage_owlFaceplate_png_1;
 
 

@@ -390,6 +390,11 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
     dataFormatLabel->setColour (TextEditor::textColourId, Colours::black);
     dataFormatLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
+    addAndMakeVisible (pollDeviceButton = new ToggleButton ("new toggle button"));
+    pollDeviceButton->setButtonText (TRANS("Poll Device"));
+    pollDeviceButton->addListener (this);
+    pollDeviceButton->setToggleState (true, dontSendNotification);
+
     cachedImage_owlFaceplate_png_1 = ImageCache::getFromMemory (owlFaceplate_png, owlFaceplate_pngSize);
 
     //[UserPreSize]
@@ -507,6 +512,7 @@ OwlControlGui::~OwlControlGui()
     statsLabel = nullptr;
     dataFormatComboBox = nullptr;
     dataFormatLabel = nullptr;
+    pollDeviceButton = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -587,6 +593,7 @@ void OwlControlGui::resized()
     statsLabel->setBounds (16, 448, 360, 16);
     dataFormatComboBox->setBounds (285, 593, 73, 24);
     dataFormatLabel->setBounds (197, 593, 80, 24);
+    pollDeviceButton->setBounds (607, 424, 96, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -837,6 +844,12 @@ void OwlControlGui::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_halfSpeedButton] -- add your button handler code here..
       theSettings.setConfigurationValue(SYSEX_CONFIGURATION_CODEC_HALFSPEED, halfSpeedButton->getToggleState());
         //[/UserButtonCode_halfSpeedButton]
+    }
+    else if (buttonThatWasClicked == pollDeviceButton)
+    {
+        //[UserButtonCode_pollDeviceButton] -- add your button handler code here..
+      doPollDevice = pollDeviceButton->getToggleState();
+        //[/UserButtonCode_pollDeviceButton]
     }
 
     //[UserbuttonClicked_Post]
@@ -1212,13 +1225,11 @@ ApplicationCommandTarget* OwlControlGui::getNextCommandTarget(){
 }
 
 void OwlControlGui::timerCallback(){
-  if ((Time::currentTimeMillis()-theSettings.getLastMidiMessageTime())<5*timerInterval)
-    connectionButton->setColour(TextButton::buttonColourId, Colours::green);
-  else if(!doPollDevice)
-    connectionButton->setColour(TextButton::buttonColourId, Colours::yellow);
-  else
-    connectionButton->setColour(TextButton::buttonColourId, Colours::red);
   if(doPollDevice){
+    if((Time::currentTimeMillis()-theSettings.getLastMidiMessageTime())<5*timerInterval)
+      connectionButton->setColour(TextButton::buttonColourId, Colours::green);
+    else
+      connectionButton->setColour(TextButton::buttonColourId, Colours::red);
     static int counter = 0;
     switch(counter++){
     case 0:
@@ -1234,6 +1245,8 @@ void OwlControlGui::timerCallback(){
       counter = 0;
       break;
     }
+  }else{
+    connectionButton->setColour(TextButton::buttonColourId, Colours::yellow);
   }
 }
 //[/MiscUserCode]
@@ -1464,6 +1477,9 @@ BEGIN_JUCER_METADATA
          edBkgCol="0" labelText="Dataformat" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
+  <TOGGLEBUTTON name="new toggle button" id="e72f24bc0761d0c5" memberName="pollDeviceButton"
+                virtualName="" explicitFocusOrder="0" pos="607 424 96 24" buttonText="Poll Device"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="1"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
