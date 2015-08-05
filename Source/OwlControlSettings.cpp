@@ -120,7 +120,7 @@ void OwlControlSettings::setConfigurationValue(const char* name, int value){
   if(theDm.getDefaultMidiOutput() != NULL){
     String data(name);
     data += String::toHexString(value);
-    uint8_t buf[data.length()+4];
+	uint8_t *buf = (uint8_t *)alloca(data.length() + 4);
     buf[0] = MIDI_SYSEX_MANUFACTURER;
     buf[1] = MIDI_SYSEX_DEVICE;
     buf[2] = SYSEX_CONFIGURATION_COMMAND;
