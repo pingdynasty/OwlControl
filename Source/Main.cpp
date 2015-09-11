@@ -33,10 +33,7 @@ public:
 
         // Initialize audio/midi device
         PropertySet* props = ApplicationConfiguration::getApplicationProperties();
-        if(props->getBoolValue("show-low-level-items") != true)
-	  dm.initialise(0, 0, nullptr, true);
-        else
-	  dm.initialise(2, 2, nullptr, true);
+	dm.initialise(0, 0, nullptr, true);
 
         // start GUI
         mainWindow = new MainWindow(commands, gui, dm, updateGui);        
