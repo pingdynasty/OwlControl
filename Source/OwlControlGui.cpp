@@ -660,7 +660,6 @@ void OwlControlGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     {
         //[UserComboBoxCode_patchSlotAComboBox] -- add your combo box handling code here..
         theSettings.clearMessages();
-        theSettings.resetParameterNames();
         theSettings.sendPc(comboBoxThatHasChanged->getSelectedId()-1);
 	Thread::sleep(100);
 	theSettings.setCc(REQUEST_SETTINGS, SYSEX_PARAMETER_NAME_COMMAND);

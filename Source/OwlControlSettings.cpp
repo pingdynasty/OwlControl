@@ -102,7 +102,10 @@ void OwlControlSettings::handleIncomingMidiMessage(juce::MidiInput *source, cons
       }
     }
   }else if(message.isProgramChange()){
-    pc = message.getProgramChangeNumber();
+    if(pc != message.getProgramChangeNumber()){
+      resetParameterNames();
+      pc = message.getProgramChangeNumber();
+    }
 #ifdef DEBUG
     std::cout << "rx pc " << pc << std::endl;
 #endif // DEBUG
