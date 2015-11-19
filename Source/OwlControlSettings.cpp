@@ -123,13 +123,15 @@ void OwlControlSettings::setConfigurationValue(const char* name, int value){
   if(theDm.getDefaultMidiOutput() != NULL){
     String data(name);
     data += String::toHexString(value);
-	uint8_t *buf = (uint8_t *)alloca(data.length() + 4);
+    const char* datap = static_cast<const char*>(data.getCharPointer());
+    int size = data.length() + 4;
+    uint8_t *buf = (uint8_t*)alloca(size);
     buf[0] = MIDI_SYSEX_MANUFACTURER;
     buf[1] = MIDI_SYSEX_DEVICE;
     buf[2] = SYSEX_CONFIGURATION_COMMAND;
-    memcpy(&buf[3], data.getCharPointer(), data.length());
-    buf[sizeof(buf)-1] = '\0';
-    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::createSysExMessage(buf, sizeof(buf)));
+    memcpy(&buf[3], datap, data.length());
+    buf[size-1] = '\0';
+    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::createSysExMessage(buf, size));
   }
 #ifdef DEBUG
   std::cout << "tx sysex " << name << ": " << value << std::endl;
