@@ -404,7 +404,6 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
 
     setSize (760, 640);
 
-
     //[Constructor] You can add your own custom stuff here..
 
     settingsChanged();
@@ -1234,13 +1233,16 @@ void OwlControlGui::timerCallback(){
     static int counter = 0;
     switch(counter++){
     case 0:
-      theSettings.setCc(REQUEST_SETTINGS, SYSEX_PROGRAM_STATS);
+      theSettings.setCc(REQUEST_SETTINGS, SYSEX_PROGRAM_STATS); // request program stats
       break;
     case 1:
-      theSettings.setCc(REQUEST_SETTINGS, SYSEX_PROGRAM_MESSAGE);
+      theSettings.setCc(REQUEST_SETTINGS, SYSEX_PROGRAM_MESSAGE); // request program message
       break;
     case 2:
-      theSettings.setCc(REQUEST_SETTINGS, LED);
+      theSettings.setCc(REQUEST_SETTINGS, LED); // request LED status
+      break;
+    case 3:
+      theSettings.setCc(REQUEST_SETTINGS, PATCH_PARAMETER_A); // request parameter values
       break;
     default:
       counter = 0;
