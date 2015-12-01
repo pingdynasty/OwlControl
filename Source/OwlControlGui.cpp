@@ -334,14 +334,16 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
     blockSizeComboBox->setJustificationType (Justification::centredLeft);
     blockSizeComboBox->setTextWhenNothingSelected (String::empty);
     blockSizeComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-    blockSizeComboBox->addItem (TRANS("16"), 1);
-    blockSizeComboBox->addItem (TRANS("32"), 2);
-    blockSizeComboBox->addItem (TRANS("64"), 3);
-    blockSizeComboBox->addItem (TRANS("128"), 4);
-    blockSizeComboBox->addItem (TRANS("256"), 5);
-    blockSizeComboBox->addItem (TRANS("512"), 6);
-    blockSizeComboBox->addItem (TRANS("1024"), 7);
-    blockSizeComboBox->addItem (TRANS("2048"), 8);
+    blockSizeComboBox->addItem (TRANS("2"), 1);
+    blockSizeComboBox->addItem (TRANS("4"), 2);
+    blockSizeComboBox->addItem (TRANS("8"), 3);
+    blockSizeComboBox->addItem (TRANS("16"), 4);
+    blockSizeComboBox->addItem (TRANS("32"), 5);
+    blockSizeComboBox->addItem (TRANS("64"), 6);
+    blockSizeComboBox->addItem (TRANS("128"), 7);
+    blockSizeComboBox->addItem (TRANS("256"), 8);
+    blockSizeComboBox->addItem (TRANS("512"), 9);
+    blockSizeComboBox->addItem (TRANS("1024"), 10);
     blockSizeComboBox->addListener (this);
 
     addAndMakeVisible (blockSizeeLabel = new Label ("new label",
@@ -402,7 +404,6 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
 
     setSize (760, 640);
 
-
     //[Constructor] You can add your own custom stuff here..
 
     settingsChanged();
@@ -417,17 +418,17 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
     PropertySet* props = ApplicationConfiguration::getApplicationProperties();
     if(props->getBoolValue("show-low-level-items") != true)
     {
-        leftGainSlider->setVisible(0);
-        leftGainLabel->setVisible(0);
+        // leftGainSlider->setVisible(0);
+        // leftGainLabel->setVisible(0);
         leftInputMuteButton->setVisible(0);
-        leftOutGainSlider->setVisible(0);
-        leftOutGainLabel->setVisible(0);
+        // leftOutGainSlider->setVisible(0);
+        // leftOutGainLabel->setVisible(0);
         leftOutputMuteButton->setVisible(0);
-        rightGainSlider->setVisible(0);
-        rightGainLabel->setVisible(0);
+        // rightGainSlider->setVisible(0);
+        // rightGainLabel->setVisible(0);
         rightInputMuteButton->setVisible(0);
-        rightOutGainSlider->setVisible(0);
-        rightOutGainLabel->setVisible(0);
+        // rightOutGainSlider->setVisible(0);
+        // rightOutGainLabel->setVisible(0);
         rightOutputMuteButton->setVisible(0);
         bypassButton->setVisible(0);
         swapLRButton->setVisible(0);
@@ -439,13 +440,13 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
         protocolComboBox->setVisible(0);
         masterButton->setVisible(0);
 	halfSpeedButton->setVisible(0);
-	blockSizeComboBox->setVisible(0);
-	blockSizeeLabel->setVisible(0);
+	//	blockSizeComboBox->setVisible(0);
+	//	blockSizeeLabel->setVisible(0);
 	dataFormatComboBox->setVisible(0);
 	dataFormatLabel->setVisible(0);
-    }
-    else
-    {
+    // }
+    // else
+    // {
         sensitivityComboBox->addItem("Custom", CUSTOM);
         sensitivityComboBox->setItemEnabled(CUSTOM, 0);
     }
@@ -660,7 +661,6 @@ void OwlControlGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     {
         //[UserComboBoxCode_patchSlotAComboBox] -- add your combo box handling code here..
         theSettings.clearMessages();
-        theSettings.resetParameterNames();
         theSettings.sendPc(comboBoxThatHasChanged->getSelectedId()-1);
 	Thread::sleep(100);
 	theSettings.setCc(REQUEST_SETTINGS, SYSEX_PARAMETER_NAME_COMMAND);
@@ -1233,13 +1233,16 @@ void OwlControlGui::timerCallback(){
     static int counter = 0;
     switch(counter++){
     case 0:
-      theSettings.setCc(REQUEST_SETTINGS, SYSEX_PROGRAM_STATS);
+      theSettings.setCc(REQUEST_SETTINGS, SYSEX_PROGRAM_STATS); // request program stats
       break;
     case 1:
-      theSettings.setCc(REQUEST_SETTINGS, SYSEX_PROGRAM_MESSAGE);
+      theSettings.setCc(REQUEST_SETTINGS, SYSEX_PROGRAM_MESSAGE); // request program message
       break;
     case 2:
-      theSettings.setCc(REQUEST_SETTINGS, LED);
+      theSettings.setCc(REQUEST_SETTINGS, LED); // request LED status
+      break;
+    case 3:
+      theSettings.setCc(REQUEST_SETTINGS, PATCH_PARAMETER_A); // request parameter values
       break;
     default:
       counter = 0;
@@ -1448,7 +1451,7 @@ BEGIN_JUCER_METADATA
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <COMBOBOX name="new combo box" id="732ba8655b6d4ba5" memberName="blockSizeComboBox"
             virtualName="" explicitFocusOrder="0" pos="512 472 150 24" editable="0"
-            layout="33" items="16&#10;32&#10;64&#10;128&#10;256&#10;512&#10;1024&#10;2048"
+            layout="33" items="2&#10;4&#10;8&#10;16&#10;32&#10;64&#10;128&#10;256&#10;512&#10;1024"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="a6d7772d29eecd54" memberName="blockSizeeLabel"
          virtualName="" explicitFocusOrder="0" pos="407 472 103 24" edTextCol="ff000000"
