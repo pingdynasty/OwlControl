@@ -64,10 +64,7 @@ bool JUCE_CALLTYPE Process::openEmailWithAttachments (const String& targetEmailA
                                                       const StringArray& filesToAttach)
 {
   #if JUCE_IOS
-    (void) targetEmailAddress;
-    (void) emailSubject;
-    (void) bodyText;
-    (void) filesToAttach;
+    ignoreUnused (targetEmailAddress, emailSubject, bodyText, filesToAttach);
 
     //xxx probably need to use MFMailComposeViewController
     jassertfalse;
@@ -234,7 +231,7 @@ public:
 
     void didFailWithError (NSError* error)
     {
-        DBG (nsStringToJuce ([error description])); (void) error;
+        DBG (nsStringToJuce ([error description])); ignoreUnused (error);
         hasFailed = true;
         initialised = true;
         signalThreadShouldExit();
@@ -350,9 +347,10 @@ public:
     WebInputStream (const String& address_, bool isPost_, const MemoryBlock& postData_,
                     URL::OpenStreamProgressCallback* progressCallback, void* progressCallbackContext,
                     const String& headers_, int timeOutMs_, StringPairArray* responseHeaders,
-                    const int numRedirectsToFollow_)
+                    const int numRedirectsToFollow_, const String& httpRequestCmd_)
       : statusCode (0), address (address_), headers (headers_), postData (postData_), position (0),
-        finished (false), isPost (isPost_), timeOutMs (timeOutMs_), numRedirectsToFollow (numRedirectsToFollow_)
+        finished (false), isPost (isPost_), timeOutMs (timeOutMs_),
+        numRedirectsToFollow (numRedirectsToFollow_), httpRequestCmd (httpRequestCmd_)
     {
         JUCE_AUTORELEASEPOOL
         {
@@ -429,6 +427,7 @@ private:
     const bool isPost;
     const int timeOutMs;
     const int numRedirectsToFollow;
+    String httpRequestCmd;
 
     void createConnection (URL::OpenStreamProgressCallback* progressCallback, void* progressCallbackContext)
     {
@@ -440,7 +439,7 @@ private:
 
         if (req != nil)
         {
-            [req setHTTPMethod: nsStringLiteral (isPost ? "POST" : "GET")];
+            [req setHTTPMethod: [NSString stringWithUTF8String: httpRequestCmd.toRawUTF8()]];
             //[req setCachePolicy: NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
 
             StringArray headerLines;
