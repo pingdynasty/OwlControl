@@ -607,12 +607,12 @@ public:
         }
     }
 
-    void runTest()
+    void runTest() override
     {
         beginTest ("JSON");
         Random r = getRandom();
 
-        expect (JSON::parse (String::empty) == var::null);
+        expect (JSON::parse (String::empty) == var());
         expect (JSON::parse ("{}").isObject());
         expect (JSON::parse ("[]").isArray());
         expect (JSON::parse ("[ 1234 ]")[0].isInt());
