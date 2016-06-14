@@ -15,7 +15,7 @@ void OwlControlSettings::resetParameterNames(){
 }
 
 OwlControlSettings::OwlControlSettings(AudioDeviceManager& dm, Value& updateGui):
-  theDm(dm), theUpdateGui(updateGui), pc(0)
+  pc(0), theUpdateGui(updateGui), theDm(dm)
 {
   memset(midiArray, 0, NB_CHANNELS);
   theDm.addMidiInputCallback(String::empty, this);

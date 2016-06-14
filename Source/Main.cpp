@@ -32,7 +32,6 @@ public:
 	commands->setFirstCommandTarget(gui);
 
         // Initialize audio/midi device
-        PropertySet* props = ApplicationConfiguration::getApplicationProperties();
 	dm.initialise(0, 0, nullptr, true);
 
         // start GUI
@@ -119,7 +118,6 @@ public:
 	setContentOwned(tabs, false);
 	tabs->addTab("Main", Colours::lightgrey, gui, false, 1);
 	tabs->addTab("Application Settings", Colours::lightgrey, new ApplicationSettingsWindow(dm), true, 2);
-    PropertySet* props = ApplicationConfiguration::getApplicationProperties();
 	tabs->setSize(779, 700);
 	centreWithSize (779, 700);
 	setVisible (true);

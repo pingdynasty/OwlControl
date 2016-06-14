@@ -2,9 +2,7 @@
 #include "JuceHeader.h"
 
 void ApplicationConfiguration::initialise(){
-  PropertiesFile* properties = ApplicationConfiguration::getApplicationProperties();
-  // getMidiMessageReceiver()->setMidiInput(properties->getValue("midiinput"));
-  // getBlipSim()->setMidiOutput(properties->getValue("midioutput"));
+  ApplicationConfiguration::getApplicationProperties();
 }
 
 static PropertiesFile* properties = NULL;

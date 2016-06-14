@@ -837,6 +837,8 @@ void OwlControlGui::buttonClicked (Button* buttonThatWasClicked)
       slider3->setEnabled(remote);
       slider4->setEnabled(remote);
       slider5->setEnabled(remote);
+      if(remote == doPollDevice)
+	pollDeviceButton->triggerClick(); // disable or enable polling as required
         //[/UserButtonCode_remoteControlButton]
     }
     else if (buttonThatWasClicked == halfSpeedButton)
@@ -951,7 +953,6 @@ void OwlControlGui::settingsChanged() {
       label5->setText(parameters[4], dontSendNotification);
     }
 
-    PropertySet* props = ApplicationConfiguration::getApplicationProperties();
     // Parameter values
     slider1->setValue(theSettings.getCc(PATCH_PARAMETER_A)/127.0);
     slider2->setValue(theSettings.getCc(PATCH_PARAMETER_B)/127.0);
@@ -1137,7 +1138,7 @@ void OwlControlGui::loadSysexPatchFromDisk(){
 	setStatus("Sending Patch Run command");
 	theSettings.runSysexPatch();
       }else{
-	setStatus("Sending Patch Store command for slot "+response);
+	setStatus("Sending Patch Store command for slot "+juce::String(response));
 	theSettings.storeSysexPatch(response-1);
       }
     }else{

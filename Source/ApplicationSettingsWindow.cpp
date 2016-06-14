@@ -30,7 +30,7 @@
 //==============================================================================
 ApplicationSettingsWindow::ApplicationSettingsWindow (AudioDeviceManager& deviceManager)
 {
-    addAndMakeVisible (audioSelector = new AudioDeviceSelectorComponent (deviceManager,0,0,0,0,true,true,true,false));
+    addAndMakeVisible (audioSelector = new AudioDeviceSelectorComponent (deviceManager,0,0,0,0,true,true,false,false));
     audioSelector->setName ("new component");
 
 
