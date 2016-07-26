@@ -1042,6 +1042,8 @@ void OwlControlGui::settingsChanged() {
 
     // MIDI Input and Output channel
     v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_MIDI_INPUT_CHANNEL);
+    if(v == 0xff)
+      v = -1;
     midiInputChannelComboBox->setSelectedId(v+2, dontSendNotification);
     v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_MIDI_OUTPUT_CHANNEL);
     midiOutputChannelComboBox->setSelectedId(v+1, dontSendNotification);
