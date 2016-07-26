@@ -50,11 +50,16 @@ public:
   void storeSysexPatch(uint8_t slot);
   void flashFirmware(uint32_t checksum);
 
+  void setMidiChannel(int ch){
+    if(ch > 0 && ch <= 16)
+      channel = ch;
+  }
 private:
   String programMessage;
   String statsMessage;
   int midiArray[NB_CHANNELS]; // index represents Midi CC, value represents Midi Value.
   int pc; // last received Program Change value
+  int channel;
   Value& theUpdateGui;
   AudioDeviceManager& theDm;
   StringArray presets;

@@ -15,7 +15,7 @@ void OwlControlSettings::resetParameterNames(){
 }
 
 OwlControlSettings::OwlControlSettings(AudioDeviceManager& dm, Value& updateGui):
-  pc(0), theUpdateGui(updateGui), theDm(dm)
+  pc(0), theUpdateGui(updateGui), theDm(dm), channel(1)
 {
   memset(midiArray, 0, NB_CHANNELS);
   theDm.addMidiInputCallback(String::empty, this);
@@ -210,7 +210,7 @@ void OwlControlSettings::setCc(int cc,int value)
     if (cc>0 && cc<NB_CHANNELS){
       midiArray[cc] = value;
       if(theDm.getDefaultMidiOutput() != NULL)
-        theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(1,cc,value));
+        theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(channel, cc, value));
 #ifdef DEBUG
       std::cout << "tx cc " << cc << ": " << value << std::endl;
 #endif // DEBUG
@@ -222,7 +222,7 @@ void OwlControlSettings::sendPc(int pc)
   // clip to valid value range
   pc = std::min(127, std::max(0, pc));
   if(theDm.getDefaultMidiOutput() != NULL){
-    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::programChange(1, pc));
+    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::programChange(channel, pc));
   }
 #ifdef DEBUG
   std::cout << "tx pc: " << (int)pc << std::endl;
@@ -255,13 +255,13 @@ void OwlControlSettings::storeFirmware(uint8_t slot){
 
 void OwlControlSettings::saveToOwl(){
   if(theDm.getDefaultMidiOutput() != NULL)
-    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(1,SAVE_SETTINGS,127));
+    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(channel, SAVE_SETTINGS,127));
 }
 
 void OwlControlSettings::loadFromOwl(){
   if(theDm.getDefaultMidiOutput() != NULL){
     presets.clear();
-    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(1,REQUEST_SETTINGS,127)); // Will provoke incoming midi messages
+    theDm.getDefaultMidiOutput()->sendMessageNow(MidiMessage::controllerEvent(channel, REQUEST_SETTINGS,127)); // Will provoke incoming midi messages
   }
 }
 

@@ -1,17 +1,17 @@
 /*
   ==============================================================================
 
-  This is an automatically generated GUI class created by the Introjucer!
+  This is an automatically generated GUI class created by the Projucer!
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Introjucer version: 3.2.0
+  Created with Projucer version: 4.2.1
 
   ------------------------------------------------------------------------------
 
-  The Introjucer is part of the JUCE library - "Jules' Utility Class Extensions"
+  The Projucer is part of the JUCE library - "Jules' Utility Class Extensions"
   Copyright (c) 2015 - ROLI Ltd.
 
   ==============================================================================
@@ -40,16 +40,29 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
     //[/Constructor_pre]
 
     setName ("MainGui");
-    addAndMakeVisible (samplingRateComboBox = new ComboBox ("new combo box"));
-    samplingRateComboBox->setEditableText (false);
-    samplingRateComboBox->setJustificationType (Justification::centredLeft);
-    samplingRateComboBox->setTextWhenNothingSelected (String::empty);
-    samplingRateComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-    samplingRateComboBox->addItem (TRANS("8 kHz"), 1);
-    samplingRateComboBox->addItem (TRANS("32 kHz"), 2);
-    samplingRateComboBox->addItem (TRANS("48 kHz"), 3);
-    samplingRateComboBox->addItem (TRANS("96 kHz"), 4);
-    samplingRateComboBox->addListener (this);
+    addAndMakeVisible (midiInputChannelComboBox = new ComboBox ("new combo box"));
+    midiInputChannelComboBox->setEditableText (false);
+    midiInputChannelComboBox->setJustificationType (Justification::centredLeft);
+    midiInputChannelComboBox->setTextWhenNothingSelected (String());
+    midiInputChannelComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    midiInputChannelComboBox->addItem (TRANS("OMNI"), 1);
+    midiInputChannelComboBox->addItem (TRANS("1"), 2);
+    midiInputChannelComboBox->addItem (TRANS("2"), 3);
+    midiInputChannelComboBox->addItem (TRANS("3"), 4);
+    midiInputChannelComboBox->addItem (TRANS("4"), 5);
+    midiInputChannelComboBox->addItem (TRANS("5"), 6);
+    midiInputChannelComboBox->addItem (TRANS("6"), 7);
+    midiInputChannelComboBox->addItem (TRANS("7"), 8);
+    midiInputChannelComboBox->addItem (TRANS("8"), 9);
+    midiInputChannelComboBox->addItem (TRANS("9"), 10);
+    midiInputChannelComboBox->addItem (TRANS("10"), 11);
+    midiInputChannelComboBox->addItem (TRANS("11"), 12);
+    midiInputChannelComboBox->addItem (TRANS("12"), 13);
+    midiInputChannelComboBox->addItem (TRANS("13"), 14);
+    midiInputChannelComboBox->addItem (TRANS("14"), 15);
+    midiInputChannelComboBox->addItem (TRANS("15"), 16);
+    midiInputChannelComboBox->addItem (TRANS("16"), 17);
+    midiInputChannelComboBox->addListener (this);
 
     addAndMakeVisible (samplingRateLabel = new Label ("new label",
                                                       TRANS("Sampling Rate")));
@@ -154,7 +167,7 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
     addAndMakeVisible (samplingBitsComboBox = new ComboBox ("new combo box"));
     samplingBitsComboBox->setEditableText (false);
     samplingBitsComboBox->setJustificationType (Justification::centredLeft);
-    samplingBitsComboBox->setTextWhenNothingSelected (String::empty);
+    samplingBitsComboBox->setTextWhenNothingSelected (String());
     samplingBitsComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     samplingBitsComboBox->addItem (TRANS("16 bit"), 1);
     samplingBitsComboBox->addItem (TRANS("24 bit"), 2);
@@ -177,7 +190,7 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
     addAndMakeVisible (protocolComboBox = new ComboBox ("new combo box"));
     protocolComboBox->setEditableText (false);
     protocolComboBox->setJustificationType (Justification::centredLeft);
-    protocolComboBox->setTextWhenNothingSelected (String::empty);
+    protocolComboBox->setTextWhenNothingSelected (String());
     protocolComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     protocolComboBox->addItem (TRANS("Philips"), 1);
     protocolComboBox->addItem (TRANS("MSB"), 2);
@@ -206,7 +219,7 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
     addAndMakeVisible (patchSlotAComboBox = new ComboBox ("new combo box"));
     patchSlotAComboBox->setEditableText (false);
     patchSlotAComboBox->setJustificationType (Justification::centredLeft);
-    patchSlotAComboBox->setTextWhenNothingSelected (String::empty);
+    patchSlotAComboBox->setTextWhenNothingSelected (String());
     patchSlotAComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     patchSlotAComboBox->addItem (TRANS("..."), 1);
     patchSlotAComboBox->addListener (this);
@@ -226,7 +239,7 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
     addAndMakeVisible (sensitivityComboBox = new ComboBox ("new combo box"));
     sensitivityComboBox->setEditableText (false);
     sensitivityComboBox->setJustificationType (Justification::centredLeft);
-    sensitivityComboBox->setTextWhenNothingSelected (String::empty);
+    sensitivityComboBox->setTextWhenNothingSelected (String());
     sensitivityComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     sensitivityComboBox->addListener (this);
 
@@ -239,7 +252,7 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
     sensitivityLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (connectionButton = new TextButton ("new button"));
-    connectionButton->setButtonText (String::empty);
+    connectionButton->setButtonText (String());
     connectionButton->setColour (TextButton::buttonColourId, Colours::grey);
 
     addAndMakeVisible (slider4 = new Slider ("new slider"));
@@ -332,7 +345,7 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
     addAndMakeVisible (blockSizeComboBox = new ComboBox ("new combo box"));
     blockSizeComboBox->setEditableText (false);
     blockSizeComboBox->setJustificationType (Justification::centredLeft);
-    blockSizeComboBox->setTextWhenNothingSelected (String::empty);
+    blockSizeComboBox->setTextWhenNothingSelected (String());
     blockSizeComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     blockSizeComboBox->addItem (TRANS("2"), 1);
     blockSizeComboBox->addItem (TRANS("4"), 2);
@@ -377,7 +390,7 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
     addAndMakeVisible (dataFormatComboBox = new ComboBox ("new combo box"));
     dataFormatComboBox->setEditableText (false);
     dataFormatComboBox->setJustificationType (Justification::centredLeft);
-    dataFormatComboBox->setTextWhenNothingSelected (String::empty);
+    dataFormatComboBox->setTextWhenNothingSelected (String());
     dataFormatComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     dataFormatComboBox->addItem (TRANS("16 bit"), 1);
     dataFormatComboBox->addItem (TRANS("24 bit"), 2);
@@ -397,12 +410,52 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
     pollDeviceButton->addListener (this);
     pollDeviceButton->setToggleState (true, dontSendNotification);
 
+    addAndMakeVisible (midiInputChannelLabel = new Label ("new label",
+                                                          TRANS("MIDI In Ch")));
+    midiInputChannelLabel->setFont (Font (15.00f, Font::plain));
+    midiInputChannelLabel->setJustificationType (Justification::centredLeft);
+    midiInputChannelLabel->setEditable (false, false, false);
+    midiInputChannelLabel->setColour (TextEditor::textColourId, Colours::black);
+    midiInputChannelLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (midiOutputChannelComboBox = new ComboBox ("new combo box"));
+    midiOutputChannelComboBox->setEditableText (false);
+    midiOutputChannelComboBox->setJustificationType (Justification::centredLeft);
+    midiOutputChannelComboBox->setTextWhenNothingSelected (String());
+    midiOutputChannelComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    midiOutputChannelComboBox->addItem (TRANS("1"), 1);
+    midiOutputChannelComboBox->addItem (TRANS("2"), 2);
+    midiOutputChannelComboBox->addItem (TRANS("3"), 3);
+    midiOutputChannelComboBox->addItem (TRANS("4"), 4);
+    midiOutputChannelComboBox->addItem (TRANS("5"), 5);
+    midiOutputChannelComboBox->addItem (TRANS("6"), 6);
+    midiOutputChannelComboBox->addItem (TRANS("7"), 7);
+    midiOutputChannelComboBox->addItem (TRANS("8"), 8);
+    midiOutputChannelComboBox->addItem (TRANS("9"), 9);
+    midiOutputChannelComboBox->addItem (TRANS("10"), 10);
+    midiOutputChannelComboBox->addItem (TRANS("11"), 11);
+    midiOutputChannelComboBox->addItem (TRANS("12"), 12);
+    midiOutputChannelComboBox->addItem (TRANS("13"), 13);
+    midiOutputChannelComboBox->addItem (TRANS("14"), 14);
+    midiOutputChannelComboBox->addItem (TRANS("15"), 15);
+    midiOutputChannelComboBox->addItem (TRANS("16"), 16);
+    midiOutputChannelComboBox->addListener (this);
+
+    addAndMakeVisible (midiIOututChannelLabel = new Label ("new label",
+                                                           TRANS("MIDI Out Ch")));
+    midiIOututChannelLabel->setFont (Font (15.00f, Font::plain));
+    midiIOututChannelLabel->setJustificationType (Justification::centredLeft);
+    midiIOututChannelLabel->setEditable (false, false, false);
+    midiIOututChannelLabel->setColour (TextEditor::textColourId, Colours::black);
+    midiIOututChannelLabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
     cachedImage_owlFaceplate_png_1 = ImageCache::getFromMemory (owlFaceplate_png, owlFaceplate_pngSize);
 
     //[UserPreSize]
     //[/UserPreSize]
 
     setSize (760, 640);
+
 
     //[Constructor] You can add your own custom stuff here..
 
@@ -432,7 +485,7 @@ OwlControlGui::OwlControlGui (OwlControlSettings& settings, AudioDeviceManager& 
         rightOutputMuteButton->setVisible(0);
         bypassButton->setVisible(0);
         swapLRButton->setVisible(0);
-        samplingRateComboBox->setVisible(0);
+        // samplingRateComboBox->setVisible(0);
         samplingRateLabel->setVisible(0);
         samplingBitsComboBox->setVisible(0);
         samplingBitsLabel->setVisible(0);
@@ -463,7 +516,7 @@ OwlControlGui::~OwlControlGui()
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
 
-    samplingRateComboBox = nullptr;
+    midiInputChannelComboBox = nullptr;
     samplingRateLabel = nullptr;
     loadButton = nullptr;
     leftGainSlider = nullptr;
@@ -514,6 +567,9 @@ OwlControlGui::~OwlControlGui()
     dataFormatComboBox = nullptr;
     dataFormatLabel = nullptr;
     pollDeviceButton = nullptr;
+    midiInputChannelLabel = nullptr;
+    midiOutputChannelComboBox = nullptr;
+    midiIOututChannelLabel = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -544,7 +600,7 @@ void OwlControlGui::resized()
     //[UserPreResize] Add your own custom resize code here..
     //[/UserPreResize]
 
-    samplingRateComboBox->setBounds (512, 501, 150, 24);
+    midiInputChannelComboBox->setBounds (494, 530, 56, 24);
     samplingRateLabel->setBounds (407, 501, 103, 24);
     loadButton->setBounds (56, 392, 150, 24);
     leftGainSlider->setBounds (132, 472, 150, 24);
@@ -595,6 +651,9 @@ void OwlControlGui::resized()
     dataFormatComboBox->setBounds (285, 593, 73, 24);
     dataFormatLabel->setBounds (197, 593, 80, 24);
     pollDeviceButton->setBounds (607, 424, 96, 24);
+    midiInputChannelLabel->setBounds (408, 530, 80, 24);
+    midiOutputChannelComboBox->setBounds (646, 530, 56, 24);
+    midiIOututChannelLabel->setBounds (561, 530, 80, 24);
     //[UserResized] Add your own custom resize handling here..
 //    audioSelector->setBounds(8,8,300,200);
     //[/UserResized]
@@ -607,28 +666,13 @@ void OwlControlGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     int val = 0;
     //[/UsercomboBoxChanged_Pre]
 
-    if (comboBoxThatHasChanged == samplingRateComboBox)
+    if (comboBoxThatHasChanged == midiInputChannelComboBox)
     {
-        //[UserComboBoxCode_samplingRateComboBox] -- add your combo box handling code here..
-      switch(samplingRateComboBox->getSelectedId()) {
-      case 1: // 8kHz
-	val = 8000;
-	break;
-      case 2: // 32kHz
-	val = 32000;
-	break;
-      case 3: // 48kHz
-	val = 48000;
-	break;
-      case 4: // 96kHz
-	val = 96000;
-	break;
-      default:
-	val = 48000;
-	break;
-      }
-      theSettings.setConfigurationValue(SYSEX_CONFIGURATION_AUDIO_RATE, val);
-        //[/UserComboBoxCode_samplingRateComboBox]
+        //[UserComboBoxCode_midiInputChannelComboBox] -- add your combo box handling code here..
+      int8_t ch = midiInputChannelComboBox->getSelectedId()-2;
+      theSettings.setConfigurationValue(SYSEX_CONFIGURATION_MIDI_INPUT_CHANNEL, ch);
+      theSettings.setMidiChannel(ch+1);
+        //[/UserComboBoxCode_midiInputChannelComboBox]
     }
     else if (comboBoxThatHasChanged == samplingBitsComboBox)
     {
@@ -723,6 +767,13 @@ void OwlControlGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
         }
 	theSettings.setConfigurationValue(SYSEX_CONFIGURATION_AUDIO_DATAFORMAT, val);
         //[/UserComboBoxCode_dataFormatComboBox]
+    }
+    else if (comboBoxThatHasChanged == midiOutputChannelComboBox)
+    {
+        //[UserComboBoxCode_midiOutputChannelComboBox] -- add your combo box handling code here..
+      int8_t ch = midiOutputChannelComboBox->getSelectedId()-1;
+      theSettings.setConfigurationValue(SYSEX_CONFIGURATION_MIDI_OUTPUT_CHANNEL, ch);
+        //[/UserComboBoxCode_midiOutputChannelComboBox]
     }
 
     //[UsercomboBoxChanged_Post]
@@ -982,13 +1033,19 @@ void OwlControlGui::settingsChanged() {
 
     // Sampling rate and bits
     v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_AUDIO_RATE);
-    // samplingRateComboBox->setSelectedId(v+1, dontSendNotification);
-    samplingRateComboBox->setText(String(v), dontSendNotification);
+    // // samplingRateComboBox->setSelectedId(v+1, dontSendNotification);
+    // samplingRateComboBox->setText(String(v), dontSendNotification);
     v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_AUDIO_BITDEPTH);
     samplingBitsComboBox->setText(String(v), dontSendNotification);
     v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_AUDIO_DATAFORMAT);
     dataFormatComboBox->setText(String(v), dontSendNotification);
 
+    // MIDI Input and Output channel
+    v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_MIDI_INPUT_CHANNEL);
+    midiInputChannelComboBox->setSelectedId(v+2, dontSendNotification);
+    v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_MIDI_OUTPUT_CHANNEL);
+    midiOutputChannelComboBox->setSelectedId(v+1, dontSendNotification);
+    
     // Bypass
     v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_CODEC_BYPASS);
     if(v)
@@ -1258,9 +1315,9 @@ void OwlControlGui::timerCallback(){
 
 //==============================================================================
 #if 0
-/*  -- Introjucer information section --
+/*  -- Projucer information section --
 
-    This is where the Introjucer stores the metadata that describe this GUI layout, so
+    This is where the Projucer stores the metadata that describe this GUI layout, so
     make changes in here at your peril!
 
 BEGIN_JUCER_METADATA
@@ -1275,10 +1332,10 @@ BEGIN_JUCER_METADATA
     <IMAGE pos="-10 -68 780 700" resource="owlFaceplate_png" opacity="0.25800000000000000711"
            mode="1"/>
   </BACKGROUND>
-  <COMBOBOX name="new combo box" id="7eed9fbfa06bf85b" memberName="samplingRateComboBox"
-            virtualName="" explicitFocusOrder="0" pos="512 501 150 24" editable="0"
-            layout="33" items="8 kHz&#10;32 kHz&#10;48 kHz&#10;96 kHz" textWhenNonSelected=""
-            textWhenNoItems="(no choices)"/>
+  <COMBOBOX name="new combo box" id="7eed9fbfa06bf85b" memberName="midiInputChannelComboBox"
+            virtualName="" explicitFocusOrder="0" pos="494 530 56 24" editable="0"
+            layout="33" items="OMNI&#10;1&#10;2&#10;3&#10;4&#10;5&#10;6&#10;7&#10;8&#10;9&#10;10&#10;11&#10;12&#10;13&#10;14&#10;15&#10;16"
+            textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="new label" id="aedcbbc865265e" memberName="samplingRateLabel"
          virtualName="" explicitFocusOrder="0" pos="407 501 103 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Sampling Rate" editableSingleClick="0"
@@ -1290,7 +1347,8 @@ BEGIN_JUCER_METADATA
   <SLIDER name="new slider" id="ce099269a95e9cf7" memberName="leftGainSlider"
           virtualName="" explicitFocusOrder="0" pos="132 472 150 24" min="-34.5"
           max="12" int="1.5" style="LinearHorizontal" textBoxPos="TextBoxRight"
-          textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
+          textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"
+          needsCallback="1"/>
   <LABEL name="new label" id="2138fad0eb10f8ee" memberName="leftGainLabel"
          virtualName="" explicitFocusOrder="0" pos="17 472 112 24" edTextCol="ff000000"
          edBkgCol="0" labelText="dB Input Gain L" editableSingleClick="0"
@@ -1316,11 +1374,13 @@ BEGIN_JUCER_METADATA
   <SLIDER name="new slider" id="751638225df21da5" memberName="rightGainSlider"
           virtualName="" explicitFocusOrder="0" pos="132 501 150 24" min="-34.5"
           max="12" int="1.5" style="LinearHorizontal" textBoxPos="TextBoxRight"
-          textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
+          textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"
+          needsCallback="1"/>
   <SLIDER name="new slider" id="59927295068e5acd" memberName="leftOutGainSlider"
           virtualName="" explicitFocusOrder="0" pos="132 533 150 24" min="-73"
           max="6" int="1" style="LinearHorizontal" textBoxPos="TextBoxRight"
-          textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
+          textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"
+          needsCallback="1"/>
   <LABEL name="new label" id="d2acb69e045cd837" memberName="leftOutGainLabel"
          virtualName="" explicitFocusOrder="0" pos="16 533 120 24" edTextCol="ff000000"
          edBkgCol="0" labelText="dB Output Gain L" editableSingleClick="0"
@@ -1334,7 +1394,8 @@ BEGIN_JUCER_METADATA
   <SLIDER name="new slider" id="e520e83dc8199cec" memberName="rightOutGainSlider"
           virtualName="" explicitFocusOrder="0" pos="132 562 150 24" min="-73"
           max="6" int="1" style="LinearHorizontal" textBoxPos="TextBoxRight"
-          textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"/>
+          textBoxEditable="1" textBoxWidth="35" textBoxHeight="20" skewFactor="1"
+          needsCallback="1"/>
   <TOGGLEBUTTON name="new toggle button" id="c3d4453ea3e0bad0" memberName="leftInputMuteButton"
                 virtualName="" explicitFocusOrder="0" pos="292 472 100 24" buttonText="Mute"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
@@ -1401,12 +1462,12 @@ BEGIN_JUCER_METADATA
           explicitFocusOrder="0" pos="536 29 90 90" bkgcol="fff0ffff" thumbcol="ff6495ed"
           rotarysliderfill="ff000000" min="0" max="1" int="0" style="RotaryVerticalDrag"
           textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
-          textBoxHeight="20" skewFactor="1"/>
+          textBoxHeight="20" skewFactor="1" needsCallback="1"/>
   <SLIDER name="new slider" id="e44596456ad5f45a" memberName="slider3"
           virtualName="" explicitFocusOrder="0" pos="399 29 90 90" thumbcol="ff6495ed"
           trackcol="ffff0000" rotarysliderfill="ff000000" min="0" max="1"
           int="0" style="RotaryVerticalDrag" textBoxPos="NoTextBox" textBoxEditable="1"
-          textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
+          textBoxWidth="80" textBoxHeight="20" skewFactor="1" needsCallback="1"/>
   <LABEL name="new label" id="c6868610a29034d9" memberName="label3" virtualName=""
          explicitFocusOrder="0" pos="399 114 90 24" edTextCol="ff000000"
          edBkgCol="0" labelText="C" editableSingleClick="0" editableDoubleClick="0"
@@ -1426,7 +1487,7 @@ BEGIN_JUCER_METADATA
           virtualName="" explicitFocusOrder="0" pos="127 29 90 90" thumbcol="ff6495ed"
           rotarysliderfill="ff000000" min="0" max="1" int="0" style="RotaryVerticalDrag"
           textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
-          textBoxHeight="20" skewFactor="1"/>
+          textBoxHeight="20" skewFactor="1" needsCallback="1"/>
   <LABEL name="new label" id="83868abb5ff5c18f" memberName="label2" virtualName=""
          explicitFocusOrder="0" pos="264 114 90 24" edTextCol="ff000000"
          edBkgCol="0" labelText="B" editableSingleClick="0" editableDoubleClick="0"
@@ -1436,12 +1497,12 @@ BEGIN_JUCER_METADATA
           explicitFocusOrder="0" pos="264 29 90 90" thumbcol="ff6495ed"
           rotarysliderfill="ff000000" min="0" max="1" int="0" style="RotaryVerticalDrag"
           textBoxPos="NoTextBox" textBoxEditable="1" textBoxWidth="80"
-          textBoxHeight="20" skewFactor="1"/>
+          textBoxHeight="20" skewFactor="1" needsCallback="1"/>
   <SLIDER name="new slider" id="1b8b800be2e437f7" memberName="slider5"
           virtualName="" explicitFocusOrder="0" pos="621 144 72 139" bkgcol="fff000"
           thumbcol="ff000005" rotarysliderfill="ff000000" min="0" max="1"
           int="0" style="LinearVertical" textBoxPos="NoTextBox" textBoxEditable="1"
-          textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
+          textBoxWidth="80" textBoxHeight="20" skewFactor="1" needsCallback="1"/>
   <LABEL name="new label" id="4984964d1585aa57" memberName="label5" virtualName=""
          explicitFocusOrder="0" pos="608 282 96 24" edTextCol="ff000000"
          edBkgCol="0" labelText="E" editableSingleClick="0" editableDoubleClick="0"
@@ -1484,6 +1545,20 @@ BEGIN_JUCER_METADATA
   <TOGGLEBUTTON name="new toggle button" id="e72f24bc0761d0c5" memberName="pollDeviceButton"
                 virtualName="" explicitFocusOrder="0" pos="607 424 96 24" buttonText="Poll Device"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="1"/>
+  <LABEL name="new label" id="78f64e5d7332eebc" memberName="midiInputChannelLabel"
+         virtualName="" explicitFocusOrder="0" pos="408 530 80 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="MIDI In Ch" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="0" italic="0" justification="33"/>
+  <COMBOBOX name="new combo box" id="172c863e198d4886" memberName="midiOutputChannelComboBox"
+            virtualName="" explicitFocusOrder="0" pos="646 530 56 24" editable="0"
+            layout="33" items="1&#10;2&#10;3&#10;4&#10;5&#10;6&#10;7&#10;8&#10;9&#10;10&#10;11&#10;12&#10;13&#10;14&#10;15&#10;16"
+            textWhenNonSelected="" textWhenNoItems="(no choices)"/>
+  <LABEL name="new label" id="fd7379bc18362f78" memberName="midiIOututChannelLabel"
+         virtualName="" explicitFocusOrder="0" pos="561 530 80 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="MIDI Out Ch" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15" bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
