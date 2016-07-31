@@ -941,30 +941,35 @@ void OwlControlGui::sliderValueChanged (Slider* sliderThatWasMoved)
     else if (sliderThatWasMoved == slider4)
     {
         //[UserSliderCode_slider4] -- add your slider handling code here..
+      if(remoteControlButton->getToggleState())
         theSettings.setCc(PATCH_PARAMETER_D, sliderThatWasMoved->getValue()*127);
         //[/UserSliderCode_slider4]
     }
     else if (sliderThatWasMoved == slider3)
     {
         //[UserSliderCode_slider3] -- add your slider handling code here..
+      if(remoteControlButton->getToggleState())
         theSettings.setCc(PATCH_PARAMETER_C, sliderThatWasMoved->getValue()*127);
         //[/UserSliderCode_slider3]
     }
     else if (sliderThatWasMoved == slider1)
     {
         //[UserSliderCode_slider1] -- add your slider handling code here..
+      if(remoteControlButton->getToggleState())
         theSettings.setCc(PATCH_PARAMETER_A, sliderThatWasMoved->getValue()*127);
         //[/UserSliderCode_slider1]
     }
     else if (sliderThatWasMoved == slider2)
     {
         //[UserSliderCode_slider2] -- add your slider handling code here..
+      if(remoteControlButton->getToggleState())
         theSettings.setCc(PATCH_PARAMETER_B, sliderThatWasMoved->getValue()*127);
         //[/UserSliderCode_slider2]
     }
     else if (sliderThatWasMoved == slider5)
     {
         //[UserSliderCode_slider5] -- add your slider handling code here..
+      if(remoteControlButton->getToggleState())
         theSettings.setCc(PATCH_PARAMETER_E, sliderThatWasMoved->getValue()*127);
         //[/UserSliderCode_slider5]
     }
@@ -1005,11 +1010,11 @@ void OwlControlGui::settingsChanged() {
     }
 
     // Parameter values
-    slider1->setValue(theSettings.getCc(PATCH_PARAMETER_A)/127.0);
-    slider2->setValue(theSettings.getCc(PATCH_PARAMETER_B)/127.0);
-    slider3->setValue(theSettings.getCc(PATCH_PARAMETER_C)/127.0);
-    slider4->setValue(theSettings.getCc(PATCH_PARAMETER_D)/127.0);
-    slider5->setValue(theSettings.getCc(PATCH_PARAMETER_E)/127.0);
+    slider1->setValue(theSettings.getCc(PATCH_PARAMETER_A)/127.0, dontSendNotification);
+    slider2->setValue(theSettings.getCc(PATCH_PARAMETER_B)/127.0, dontSendNotification);
+    slider3->setValue(theSettings.getCc(PATCH_PARAMETER_C)/127.0, dontSendNotification);
+    slider4->setValue(theSettings.getCc(PATCH_PARAMETER_D)/127.0, dontSendNotification);
+    slider5->setValue(theSettings.getCc(PATCH_PARAMETER_E)/127.0, dontSendNotification);
 
     // LED button
     int v = theSettings.getCc(LED);
