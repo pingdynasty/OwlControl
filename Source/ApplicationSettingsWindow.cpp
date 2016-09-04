@@ -34,7 +34,7 @@ ApplicationSettingsWindow::ApplicationSettingsWindow (OwlControlSettings& settin
     //[Constructor_pre] You can add your own custom stuff here..
     //[/Constructor_pre]
 
-    addAndMakeVisible (audioSelector = new AudioDeviceSelectorComponent (deviceManager,0,2,0,2,true,true,false,false));
+    addAndMakeVisible (audioSelector = new AudioDeviceSelectorComponent (deviceManager,0,0,0,0,true,true,false,false));
     audioSelector->setName ("new component");
 
     addAndMakeVisible (midiDeviceBox = new ComboBox ("new combo box"));
@@ -162,7 +162,7 @@ BEGIN_JUCER_METADATA
   <BACKGROUND backgroundColour="ffffffff"/>
   <GENERICCOMPONENT name="new component" id="29b98dd09a98b370" memberName="audioSelector"
                     virtualName="" explicitFocusOrder="0" pos="48 40 408 344" class="AudioDeviceSelectorComponent"
-                    params="deviceManager,0,2,0,2,true,true,false,false"/>
+                    params="deviceManager,0,0,0,0,true,true,false,false"/>
   <COMBOBOX name="new combo box" id="5321cb4f4cee6a7b" memberName="midiDeviceBox"
             virtualName="" explicitFocusOrder="0" pos="304 392 150 24" editable="0"
             layout="33" items="OMNI&#10;1&#10;2&#10;3&#10;4&#10;5&#10;6&#10;7&#10;8&#10;9&#10;10&#10;11&#10;12&#10;13&#10;14&#10;15&#10;16"
