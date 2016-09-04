@@ -671,7 +671,6 @@ void OwlControlGui::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
         //[UserComboBoxCode_midiInputChannelComboBox] -- add your combo box handling code here..
       int8_t ch = midiInputChannelComboBox->getSelectedId()-2;
       theSettings.setConfigurationValue(SYSEX_CONFIGURATION_MIDI_INPUT_CHANNEL, ch);
-      theSettings.setMidiChannel(ch+1);
         //[/UserComboBoxCode_midiInputChannelComboBox]
     }
     else if (comboBoxThatHasChanged == samplingBitsComboBox)
@@ -1052,7 +1051,7 @@ void OwlControlGui::settingsChanged() {
     midiInputChannelComboBox->setSelectedId(v+2, dontSendNotification);
     v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_MIDI_OUTPUT_CHANNEL);
     midiOutputChannelComboBox->setSelectedId(v+1, dontSendNotification);
-    
+
     // Bypass
     v = theSettings.getConfigurationValue(SYSEX_CONFIGURATION_CODEC_BYPASS);
     if(v)

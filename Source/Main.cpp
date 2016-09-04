@@ -1,4 +1,5 @@
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "OwlControlSettings.h"
 #include "OwlControlGui.h"
 #include "ApplicationConfiguration.h"
 #include "ApplicationSettingsWindow.h"
@@ -35,7 +36,7 @@ public:
 	dm.initialise(0, 0, nullptr, true);
 
         // start GUI
-        mainWindow = new MainWindow(commands, gui, dm, updateGui);        
+        mainWindow = new MainWindow(commands, settings, gui, dm, updateGui);        
 	mainWindow->addKeyListener(commands->getKeyMappings());
     }
 
@@ -101,6 +102,7 @@ public:
     class MainWindow    : public DocumentWindow {
     public:
       MainWindow(ApplicationCommandManager* commands, 
+		 OwlControlSettings& settings,
 		 OwlControlGui* gui,
 		 AudioDeviceManager& dm, 
 		 Value& updateGui)  : 
@@ -117,7 +119,7 @@ public:
 	tabs = new TabbedComponent(TabbedButtonBar::TabsAtTop);
 	setContentOwned(tabs, false);
 	tabs->addTab("Main", Colours::lightgrey, gui, false, 1);
-	tabs->addTab("Application Settings", Colours::lightgrey, new ApplicationSettingsWindow(dm), true, 2);
+	tabs->addTab("Application Settings", Colours::lightgrey, new ApplicationSettingsWindow(settings, dm), true, 2);
 	tabs->setSize(779, 700);
 	centreWithSize (779, 700);
 	setVisible (true);

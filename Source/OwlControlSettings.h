@@ -1,7 +1,5 @@
-#ifndef SETTINGS_H_INCLUDED
-#define SETTINGS_H_INCLUDED
-
-#endif  // SETTINGS_H_INCLUDED
+#ifndef OWL_CONTROL_SETTINGS_H_INCLUDED
+#define OWL_CONTROL_SETTINGS_H_INCLUDED
 
 //#ifdef _MSC_VER
 //#include <win-util/stdint.h>
@@ -51,8 +49,13 @@ public:
   void flashFirmware(uint32_t checksum);
 
   void setMidiChannel(int ch){
-    if(ch > 0 && ch <= 16)
+    if(ch == 0){
+      omnidevice = true;
+      channel = 1;
+    }else if(ch > 0 && ch <= 16){
+      omnidevice = false;
       channel = ch;
+    }
   }
 private:
   String programMessage;
@@ -60,6 +63,7 @@ private:
   int midiArray[NB_CHANNELS]; // index represents Midi CC, value represents Midi Value.
   int pc; // last received Program Change value
   int channel;
+  bool omnidevice;
   Value& theUpdateGui;
   AudioDeviceManager& theDm;
   StringArray presets;
@@ -78,3 +82,5 @@ private:
   void handleErrorMessage(uint8_t data);
   void handleSysexConfigurationCommand(const char* name, int size);
 };
+
+#endif  // OWL_CONTROL_SETTINGS_H_INCLUDED

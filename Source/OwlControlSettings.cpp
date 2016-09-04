@@ -15,7 +15,7 @@ void OwlControlSettings::resetParameterNames(){
 }
 
 OwlControlSettings::OwlControlSettings(AudioDeviceManager& dm, Value& updateGui):
-  pc(0), theUpdateGui(updateGui), theDm(dm), channel(1)
+  pc(0), theUpdateGui(updateGui), theDm(dm), channel(1), omnidevice(true)
 {
   memset(midiArray, 0, NB_CHANNELS);
   theDm.addMidiInputCallback(String::empty, this);
@@ -71,7 +71,8 @@ void OwlControlSettings::handleIncomingMidiMessage(juce::MidiInput *source, cons
 #endif // DEBUG
   }else if(message.isSysEx() && message.getSysExDataSize() > 2){
     const uint8 *data = message.getSysExData();
-    if(data[0] == MIDI_SYSEX_MANUFACTURER && data[1] == MIDI_SYSEX_DEVICE){
+    if(data[0] == MIDI_SYSEX_MANUFACTURER && 
+       (data[1] == MIDI_SYSEX_DEVICE || (data[1] & 0xf0) == MIDI_SYSEX_OWL_DEVICE)){
       switch(data[2]){
       case SYSEX_PRESET_NAME_COMMAND: {
 	handlePresetNameMessage(data[3], (const char*)&data[4], message.getSysExDataSize()-4);
@@ -127,7 +128,7 @@ void OwlControlSettings::setConfigurationValue(const char* name, int value){
     int size = data.length() + 4;
     uint8_t *buf = (uint8_t*)alloca(size);
     buf[0] = MIDI_SYSEX_MANUFACTURER;
-    buf[1] = MIDI_SYSEX_DEVICE;
+    buf[1] = omnidevice ? MIDI_SYSEX_DEVICE : MIDI_SYSEX_OWL_DEVICE & channel;
     buf[2] = SYSEX_CONFIGURATION_COMMAND;
     memcpy(&buf[3], datap, data.length());
     buf[size-1] = '\0';
